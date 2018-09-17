@@ -17,14 +17,13 @@ public class Descifrado {
 
         a.addRoundKey(10, texto, mClaveExp);
         a.invShiftRows(texto);
-        //a.invSubBytes(texto);
+        a.invSubBytes(texto);
 
         for (int i = 9; i > 0; i--) {
             a.addRoundKey(i, texto, mClaveExp);
             a.invmixColumns(texto);
             a.invShiftRows(texto);
-            //a.invSubBytes(texto);
-
+            a.invSubBytes(texto);
         }
 
         a.addRoundKey(0, texto, mClaveExp);

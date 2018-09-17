@@ -8,12 +8,12 @@ package encrypkarch;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -343,47 +343,77 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField password;
     private javax.swing.JButton saveResult;
     // End of variables declaration//GEN-END:variables
+
     public void descifrar() {
+        Cifrado c = new Cifrado();
         Descifrado d = new Descifrado();
-        Operaciones aes = new Operaciones();
-        byte[] mClaveExpd = new byte[256];
+        Scanner lee = new Scanner(System.in);
+        // System.out.println("texto");
+
+        //String decimal=lee.next(); 
+        //int a =Integer.parseInt(decimal,16);
+        // System.out.println("aaa"+a);
+        int iter;
+
+        byte[] mClaveExp = new byte[256];
+
+        int[] clave = {0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69, 0x61, 0x6e, 0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69}; //clave
+
+        int[] arrTexto = {0x88, 0xb5, 0xc2, 0x03, 0xd2, 0x39, 0xc3, 0xd2, 0x5f, 0x7f, 0xf4, 0x35, 0x8e, 0xcc, 0x77, 0xc2}; // texto a cifrar
+
+        char resp;
+
         byte[][] texto = new byte[4][4];
         byte[][] mClave = new byte[4][4];
 
-        int[] clave = {0x68, 0x6f, 0x6c, 0x61, 0x20, 0x68,
-            0x6f, 0x6c, 0x61, 0x20, 0x68, 0x6f,
-            0x6c, 0x61, 0x20, 0x73}; //clave
-        int[] arrTextod = {0x04, 0xe0, 0xa7, 0x45, 0xcc, 0x7a, 0xd9, 0xad, 0x8c, 0x1e, 0x6f, 0x26, 0xee, 0x15, 0xa9, 0x2c};
+        System.out.print("*********************************************************************************");
+        System.out.print("\n");
+        System.out.print("*                                      KARCH                                    *");
+        System.out.print("\n");
+        System.out.print("*********************************************************************************");
+        System.out.print("\n");
+        System.out.print("\n");
 
         System.out.print("CLAVE: ");
         for (int i = 0; i < 16; i++) {
             System.out.printf(" %02x ", clave[i]);
         }
-        System.out.print("\nCRIPTOGRAMA: ");
+        System.out.print("\nTEXTO: ");
         for (int i = 0; i < 16; i++) {
-            System.out.printf(" %02x ", arrTextod[i]);
+            System.out.printf(" %02x ", arrTexto[i]);
         }
-        System.out.println();
+
+        System.out.print("\n\n********************************************************************************************");
+        System.out.print("\n");
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                texto[j][i] = (byte) arrTextod[i * 4 + j]; // texto a cifrar en una matriz 4X4
+                mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
             }
         }
 
-        byte[] tempRef_mClaveExpd = mClaveExpd;
-        aes.expandirClave(mClave, tempRef_mClaveExpd); //expandir la clave y guardarla en un array
-        mClaveExpd = tempRef_mClaveExpd;
-        byte[] tempRef_mClaveExp2d = mClaveExpd;
-        d.desencriptar(texto, tempRef_mClaveExp2d);
-        mClaveExpd = tempRef_mClaveExp2d;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                texto[j][i] = (byte) arrTexto[i * 4 + j]; // texto a cifrar en una matriz 4X4
+            }
+        }
 
-        System.out.print("\n\n\n*****************************TEXTO DECIFRADO**************************\n");
+        Operaciones aes = new Operaciones();
+        byte[] tempRef_mClaveExp = mClaveExp;
+        aes.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
+        mClaveExp = tempRef_mClaveExp;
+        byte[] tempRef_mClaveExp2 = mClaveExp;
+        //c.encriptar(texto, tempRef_mClaveExp2);
+        d.desencriptar(texto, mClaveExp);//ciframos el texto
+        mClaveExp = tempRef_mClaveExp2;
+
+        System.out.print("\n\n\n*****************************TEXTO DESCIFRADO**************************\n");
         System.out.print("\n");
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
 
-                System.out.printf("%02x ", texto[j][i]);
+                System.out.printf(" 0x%02x, ", texto[j][i]);
 
             }
         }
@@ -397,9 +427,7 @@ public class Main extends javax.swing.JFrame {
         Cifrado c = new Cifrado();
         byte[] mClaveExp = new byte[256];
 
-        int[] clave = {0x68, 0x6f, 0x6c, 0x61, 0x20, 0x68,
-            0x6f, 0x6c, 0x61, 0x20, 0x68, 0x6f,
-            0x6c, 0x61, 0x20, 0x73}; //clave
+        int[] clave = {0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69, 0x61, 0x6e, 0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69}; //clave
 
         int[] arrTexto = {0xb7, 0x04, 0xc5, 0xad, 0x06, 0xeb, 0x2e, 0x38, 0x4f, 0x76, 0x17, 0x7f, 0x46, 0x2f, 0x6f, 0x54};
 
@@ -469,6 +497,9 @@ public class Main extends javax.swing.JFrame {
 
     //generador de contraseñas
     public void keyGenerate() {
+        cifrar();
+        descifrar();
+
         String pass = "";
         for (int i = 0; i < 16;) {
 
@@ -488,14 +519,27 @@ public class Main extends javax.swing.JFrame {
         FileWriter flwriter = null;
         BufferedWriter bfwriter;
         try {
-            JFileChooser jFileChooser = new javax.swing.JFileChooser();
-            if (jFileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                path = jFileChooser.getSelectedFile().getAbsolutePath() + nameFile + ".txt";
-                flwriter = new FileWriter(path);
-                bfwriter = new BufferedWriter(flwriter);
-                bfwriter.write(data);
-                bfwriter.close();
-                JOptionPane.showMessageDialog(null, "El archivo se guardo con exito.");
+            boolean exist = false;
+            while (!exist) {
+
+                JFileChooser jFileChooser = new javax.swing.JFileChooser();
+                if (jFileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    path = jFileChooser.getSelectedFile().getAbsolutePath() + nameFile + ".txt";
+                    File file = new File(path);
+                    if (!file.exists()) {
+                        flwriter = new FileWriter(path);
+                        bfwriter = new BufferedWriter(flwriter);
+                        bfwriter.write(data);
+                        bfwriter.close();
+                        exist = true;
+                        JOptionPane.showMessageDialog(null, "El archivo se guardo con exito.");
+                    } else {
+                        exist = false;
+                        JOptionPane.showMessageDialog(null, "El archivo que estas intentando crear ya existe.");
+                    }
+                } else {
+                    exist = true;
+                }
             }
 
         } catch (IOException e) {
