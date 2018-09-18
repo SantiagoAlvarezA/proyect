@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Math.ceil;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
@@ -298,7 +299,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void openFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderActionPerformed
-        openFileTxt();
+        //openFileTxt();
+        arrayCryptogram("hola mundo cruel");
     }//GEN-LAST:event_openFolderActionPerformed
 
     private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
@@ -338,7 +340,7 @@ public class Main extends javax.swing.JFrame {
     private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
         // TODO add your handling code here:
         if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
-            int[][] arrayText = arrayText(inputText.getText());
+            int[][] arrayText = arrayCryptogram(inputText.getText());
 
             String texto = "";
             for (int[] fila : arrayText) {
@@ -438,8 +440,43 @@ public class Main extends javax.swing.JFrame {
         return arrayBlok;
     }
 
+    public int[][] arrayCryptogram(String text) {
+        // int  dec = Integer.parseInt(hex, 16);
+        String[] texto = new String[text.length() / 2];
+        int t = 0;
+        for (int i = 0; i < text.length();) {
+            texto[t] = text.substring(i, i + 2);
+            System.out.println(text.substring(0, 2));//he  
+
+            i = i + 2;
+            t++;
+        }
+
+//        System.out.println("----------------------------------------------------");
+//        for (String s : texto){
+//            System.out.println(s);
+//        }
+        // byte[] arrayByte = text.getBytes();
+        //bloques de 16 bytes para el texto**********
+        int[][] arrayBlok = new int[(int) ceil(texto.length / 16.0)][16];
+        int iArrayBytes = 0, jArrayBytes = 0;
+
+        for (int i = 0; i < texto.length; i++) {
+            if (jArrayBytes < 16) {
+                arrayBlok[iArrayBytes][jArrayBytes] = Integer.parseInt(texto[i], 16);
+                jArrayBytes++;
+            } else {
+                iArrayBytes++;
+                i--;
+                jArrayBytes = 0;
+            }
+        }
+
+        return arrayBlok;
+    }
+
     public int[] arrayPassword(String text) {
-        byte[] arrayByte = text.getBytes();
+        byte[] arrayByte = text.getBytes(StandardCharsets.UTF_8);
         int[] array = new int[16];
         for (int i = 0; i < arrayByte.length; i++) {
             array[i] = arrayByte[i];
@@ -470,25 +507,25 @@ public class Main extends javax.swing.JFrame {
         byte[][] texto = new byte[4][4];
         byte[][] mClave = new byte[4][4];
 
-        System.out.print("*********************************************************************************");
-        System.out.print("\n");
-        System.out.print("*                                      KARCH                                    *");
-        System.out.print("\n");
-        System.out.print("*********************************************************************************");
-        System.out.print("\n");
-        System.out.print("\n");
-
-        System.out.print("CLAVE: ");
-        for (int i = 0; i < 16; i++) {
-            System.out.printf(" %02x ", clave[i]);
-        }
-        System.out.print("\nTEXTO: ");
-        for (int i = 0; i < 16; i++) {
-            System.out.printf(" %02x ", arrTexto[i]);
-        }
-
-        System.out.print("\n\n********************************************************************************************");
-        System.out.print("\n");
+//        System.out.print("*********************************************************************************");
+//        System.out.print("\n");
+//        System.out.print("*                                      KARCH                                    *");
+//        System.out.print("\n");
+//        System.out.print("*********************************************************************************");
+//        System.out.print("\n");
+//        System.out.print("\n");
+//
+//        System.out.print("CLAVE: ");
+//        for (int i = 0; i < 16; i++) {
+//            System.out.printf(" %02x ", clave[i]);
+//        }
+//        System.out.print("\nTEXTO: ");
+//        for (int i = 0; i < 16; i++) {
+//            System.out.printf(" %02x ", arrTexto[i]);
+//        }
+//
+//        System.out.print("\n\n********************************************************************************************");
+//        System.out.print("\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
@@ -510,9 +547,8 @@ public class Main extends javax.swing.JFrame {
         d.desencriptar(texto, mClaveExp);//ciframos el texto
         mClaveExp = tempRef_mClaveExp2;
 
-        System.out.print("\n\n\n*****************************TEXTO DESCIFRADO**************************\n");
-        System.out.print("\n");
-
+//        System.out.print("\n\n\n*****************************TEXTO DESCIFRADO**************************\n");
+//        System.out.print("\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 String hex = String.format("%02x", texto[j][i]);
@@ -520,13 +556,13 @@ public class Main extends javax.swing.JFrame {
                 //cryptograma += (char) dec;
 
                 text += (char) dec;
-                System.out.printf(" 0x%02x, ", texto[j][i]);
-
+//                System.out.printf(" 0x%02x, ", texto[j][i]);
+//
             }
         }
-        System.out.print("\n\n********************************************************************");
-        System.out.print("\n");
-        System.out.print("\n\n\n\n");
+//        System.out.print("\n\n********************************************************************");
+//        System.out.print("\n");
+//        System.out.print("\n\n\n\n");
 
         return text;
     }
@@ -543,25 +579,25 @@ public class Main extends javax.swing.JFrame {
         byte[][] texto = new byte[4][4];
         byte[][] mClave = new byte[4][4];
 
-        System.out.print("*********************************************************************************");
-        System.out.print("\n");
-        System.out.print("*                                      KARCH                                    *");
-        System.out.print("\n");
-        System.out.print("*********************************************************************************");
-        System.out.print("\n");
-        System.out.print("\n");
-
-        System.out.print("CLAVE: ");
-        for (int i = 0; i < 16; i++) {
-            System.out.printf(" %02x ", clave[i]);
-        }
-        System.out.print("\nTEXTO: ");
-        for (int i = 0; i < 16; i++) {
-            System.out.printf(" %02x ", arrTexto[i]);
-        }
-
-        System.out.print("\n\n********************************************************************************************");
-        System.out.print("\n");
+//        System.out.print("*********************************************************************************");
+//        System.out.print("\n");
+//        System.out.print("*                                      KARCH                                    *");
+//        System.out.print("\n");
+//        System.out.print("*********************************************************************************");
+//        System.out.print("\n");
+//        System.out.print("\n");
+//
+//        System.out.print("CLAVE: ");
+//        for (int i = 0; i < 16; i++) {
+//            System.out.printf(" %02x ", clave[i]);
+//        }
+//        System.out.print("\nTEXTO: ");
+//        for (int i = 0; i < 16; i++) {
+//            System.out.printf(" %02x ", arrTexto[i]);
+//        }
+//
+//        System.out.print("\n\n********************************************************************************************");
+//        System.out.print("\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
@@ -582,23 +618,36 @@ public class Main extends javax.swing.JFrame {
         c.encriptar(texto, tempRef_mClaveExp2);
         mClaveExp = tempRef_mClaveExp2;
 
-        System.out.print("\n\n\n*****************************TEXTO CIFRADO**************************\n");
-        System.out.print("\n");
-
+//        System.out.print("\n\n\n*****************************TEXTO CIFRADO**************************\n");
+//        System.out.print("\n");
+//        String num = "num: ", hex1 = "hex: ", byt = "byte: ", tx = "text: ";
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
 
                 String hex = String.format("%02x", texto[j][i]);
-                int dec = Integer.parseInt(hex, 16);
-                cryptograma += (char) dec;
-                //txt += (char) dec;
+//                hex1 += hex + "  ";
+//                int dec = Integer.parseInt(hex, 16);
+//                num += dec + "  ";
+//                byt += texto[j][i] + "  ";
+                cryptograma += hex;//dec + " ";
+//                tx += (char) dec + "  ";
+//                tx += (char) dec + "  ";
 
-                System.out.printf(" 0x%02x, ", texto[j][i]);
+//                System.out.printf(" 0x%02x, ", texto[j][i]);
             }
         }
-        System.out.print("\n\n********************************************************************");
-        System.out.print("\n\n");
+//        System.out.print("\n\n********************************************************************");
+//        System.out.print("\n\n");
+//        cryptograma = num + "\n\n" + hex1 + "\n\n" + byt + "\n\n" + tx;
         return cryptograma;
+    }
+
+    public static String fromHexString(String hex) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < hex.length(); i += 2) {
+            str.append((char) Integer.parseInt(hex.substring(i, i + 2), 16));
+        }
+        return str.toString();
     }
 
     //metodo para copiar el resultado al clipboard
