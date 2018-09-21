@@ -25,7 +25,6 @@ public class Descifrado {
             a.invShiftRows(texto);
             a.invSubBytes(texto);
         }
-
         a.addRoundKey(0, texto, mClaveExp);
 
     }

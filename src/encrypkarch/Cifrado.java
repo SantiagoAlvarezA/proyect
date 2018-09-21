@@ -10,7 +10,7 @@ package encrypkarch;
 /**
  *
  * @author CHRISTIAN
-     */
+ */
 public class Cifrado {
 
     Operaciones a = new Operaciones();

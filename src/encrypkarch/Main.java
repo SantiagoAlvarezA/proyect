@@ -8,14 +8,16 @@ package encrypkarch;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Math.ceil;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
-import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -68,6 +70,8 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(this.getWidth(), this.getHeight()));
         jPanel1.setMinimumSize(new java.awt.Dimension(this.getWidth(), this.getHeight()));
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Texto original", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
+        jPanel2.setToolTipText("");
         jPanel2.setPreferredSize(new java.awt.Dimension(673, 768));
 
         inputText.setColumns(10);
@@ -145,7 +149,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(clean, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,25 +160,25 @@ public class Main extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(clean, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(openFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+                    .addComponent(openFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cypher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(90, 90, 90))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptograma / Texto decifrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
         jPanel3.setPreferredSize(new java.awt.Dimension(665, 768));
 
         outputText.setEditable(false);
@@ -211,15 +215,14 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(copyToClipBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveResult, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(copyToClipBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveResult, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,12 +242,11 @@ public class Main extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,8 +301,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void openFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderActionPerformed
-        //openFileTxt();
-        arrayCryptogram("hola mundo cruel");
+        openFileTxt();
     }//GEN-LAST:event_openFolderActionPerformed
 
     private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
@@ -315,7 +316,6 @@ public class Main extends javax.swing.JFrame {
                 for (int col : fila) {
                     text[i] = col;
                     i++;
-                    // System.out.print(Integer.toHexString(x) + " ");
                 }
                 cryptograma += cifrar(text, arrayPassword(password.getText()));
 
@@ -326,15 +326,6 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
         }
 
-//        byte a = 4;
-//        int x = (int) a;
-//        Stritn strHex = new String(Integer.toHexString(x));
-//        System.out.println(strHex);
-//////        if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
-//////            cifrar();
-//////        } else {
-//////            JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
-//////        }
     }//GEN-LAST:event_cypherActionPerformed
 
     private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
@@ -350,7 +341,6 @@ public class Main extends javax.swing.JFrame {
                 for (int col : fila) {
                     text[i] = col;
                     i++;
-                    // System.out.print(Integer.toHexString(x) + " ");
                 }
                 texto += descifrar(text, arrayPassword(password.getText()));
 
@@ -446,18 +436,9 @@ public class Main extends javax.swing.JFrame {
         int t = 0;
         for (int i = 0; i < text.length();) {
             texto[t] = text.substring(i, i + 2);
-            System.out.println(text.substring(0, 2));//he  
-
             i = i + 2;
             t++;
         }
-
-//        System.out.println("----------------------------------------------------");
-//        for (String s : texto){
-//            System.out.println(s);
-//        }
-        // byte[] arrayByte = text.getBytes();
-        //bloques de 16 bytes para el texto**********
         int[][] arrayBlok = new int[(int) ceil(texto.length / 16.0)][16];
         int iArrayBytes = 0, jArrayBytes = 0;
 
@@ -486,15 +467,7 @@ public class Main extends javax.swing.JFrame {
 
     public String descifrar(int[] crypt, int[] passwd) {
         String text = "";
-        Cifrado c = new Cifrado();
         Descifrado d = new Descifrado();
-        Scanner lee = new Scanner(System.in);
-        // System.out.println("texto");
-
-        //String decimal=lee.next(); 
-        //int a =Integer.parseInt(decimal,16);
-        // System.out.println("aaa"+a);
-        int iter;
 
         byte[] mClaveExp = new byte[256];
 
@@ -502,30 +475,9 @@ public class Main extends javax.swing.JFrame {
 
         int[] arrTexto = crypt;//{0x70,  0xa7,  0xbc,  0xdd,  0x79,  0x30,  0x84,  0xd1,  0x68,  0x81,  0xd8,  0x01,  0xa9,  0x54,  0xd4,  0xae};
 
-        char resp;
-
         byte[][] texto = new byte[4][4];
         byte[][] mClave = new byte[4][4];
 
-//        System.out.print("*********************************************************************************");
-//        System.out.print("\n");
-//        System.out.print("*                                      KARCH                                    *");
-//        System.out.print("\n");
-//        System.out.print("*********************************************************************************");
-//        System.out.print("\n");
-//        System.out.print("\n");
-//
-//        System.out.print("CLAVE: ");
-//        for (int i = 0; i < 16; i++) {
-//            System.out.printf(" %02x ", clave[i]);
-//        }
-//        System.out.print("\nTEXTO: ");
-//        for (int i = 0; i < 16; i++) {
-//            System.out.printf(" %02x ", arrTexto[i]);
-//        }
-//
-//        System.out.print("\n\n********************************************************************************************");
-//        System.out.print("\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
@@ -543,26 +495,17 @@ public class Main extends javax.swing.JFrame {
         aes.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
         mClaveExp = tempRef_mClaveExp;
         byte[] tempRef_mClaveExp2 = mClaveExp;
-        //c.encriptar(texto, tempRef_mClaveExp2);
         d.desencriptar(texto, mClaveExp);//ciframos el texto
         mClaveExp = tempRef_mClaveExp2;
 
-//        System.out.print("\n\n\n*****************************TEXTO DESCIFRADO**************************\n");
-//        System.out.print("\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 String hex = String.format("%02x", texto[j][i]);
                 int dec = Integer.parseInt(hex, 16);
-                //cryptograma += (char) dec;
-
                 text += (char) dec;
-//                System.out.printf(" 0x%02x, ", texto[j][i]);
-//
+
             }
         }
-//        System.out.print("\n\n********************************************************************");
-//        System.out.print("\n");
-//        System.out.print("\n\n\n\n");
 
         return text;
     }
@@ -579,25 +522,6 @@ public class Main extends javax.swing.JFrame {
         byte[][] texto = new byte[4][4];
         byte[][] mClave = new byte[4][4];
 
-//        System.out.print("*********************************************************************************");
-//        System.out.print("\n");
-//        System.out.print("*                                      KARCH                                    *");
-//        System.out.print("\n");
-//        System.out.print("*********************************************************************************");
-//        System.out.print("\n");
-//        System.out.print("\n");
-//
-//        System.out.print("CLAVE: ");
-//        for (int i = 0; i < 16; i++) {
-//            System.out.printf(" %02x ", clave[i]);
-//        }
-//        System.out.print("\nTEXTO: ");
-//        for (int i = 0; i < 16; i++) {
-//            System.out.printf(" %02x ", arrTexto[i]);
-//        }
-//
-//        System.out.print("\n\n********************************************************************************************");
-//        System.out.print("\n");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
@@ -618,30 +542,18 @@ public class Main extends javax.swing.JFrame {
         c.encriptar(texto, tempRef_mClaveExp2);
         mClaveExp = tempRef_mClaveExp2;
 
-//        System.out.print("\n\n\n*****************************TEXTO CIFRADO**************************\n");
-//        System.out.print("\n");
-//        String num = "num: ", hex1 = "hex: ", byt = "byte: ", tx = "text: ";
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
 
                 String hex = String.format("%02x", texto[j][i]);
-//                hex1 += hex + "  ";
-//                int dec = Integer.parseInt(hex, 16);
-//                num += dec + "  ";
-//                byt += texto[j][i] + "  ";
                 cryptograma += hex;//dec + " ";
-//                tx += (char) dec + "  ";
-//                tx += (char) dec + "  ";
 
-//                System.out.printf(" 0x%02x, ", texto[j][i]);
             }
         }
-//        System.out.print("\n\n********************************************************************");
-//        System.out.print("\n\n");
-//        cryptograma = num + "\n\n" + hex1 + "\n\n" + byt + "\n\n" + tx;
         return cryptograma;
     }
 
+    /*
     public static String fromHexString(String hex) {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < hex.length(); i += 2) {
@@ -649,7 +561,7 @@ public class Main extends javax.swing.JFrame {
         }
         return str.toString();
     }
-
+     */
     //metodo para copiar el resultado al clipboard
     public void copyToClipBoard() {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -659,7 +571,6 @@ public class Main extends javax.swing.JFrame {
 
     //generador de contraseñas
     public void keyGenerate() {
-
         String pass = "";
         for (int i = 0; i < 16;) {
 
@@ -716,6 +627,35 @@ public class Main extends javax.swing.JFrame {
     }
 
     public void openFileTxt() {
-        JOptionPane.showMessageDialog(null, "abriendo el archivo");
+        String path;
+        BufferedReader bufferedReader;
+        String readLine;
+
+        boolean open = false;
+        while (!open) {
+            JFileChooser jFileChooser = new JFileChooser();
+            if (jFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                inputText.setText("");
+                path = jFileChooser.getSelectedFile().getAbsolutePath();
+                try {
+                    bufferedReader = new BufferedReader(new FileReader(new File(path)));
+                    readLine = bufferedReader.readLine();
+                    while (readLine != null) {
+                        inputText.append(readLine);
+                        readLine = bufferedReader.readLine();
+
+                    }
+                    open = true;
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Error " + e);
+                    open = true;
+                }
+
+            } else {
+                open = true;
+            }
+
+        }
     }
+
 }
