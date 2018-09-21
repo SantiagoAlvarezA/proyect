@@ -55,24 +55,25 @@ public class Main extends javax.swing.JFrame {
         keyGenerate = new javax.swing.JButton();
         cypher = new javax.swing.JButton();
         decipher = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        savePassword = new javax.swing.JButton();
         openFolder = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         outputText = new javax.swing.JTextArea();
         copyToClipBoard = new javax.swing.JButton();
         saveResult = new javax.swing.JButton();
+        copyCryptogram = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cypher algorithm");
         setPreferredSize(new java.awt.Dimension(1366, 768));
-        setResizable(false);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(this.getWidth(), this.getHeight()));
         jPanel1.setMinimumSize(new java.awt.Dimension(this.getWidth(), this.getHeight()));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Texto original", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
         jPanel2.setToolTipText("");
+        jPanel2.setMinimumSize(new java.awt.Dimension(400, 400));
         jPanel2.setPreferredSize(new java.awt.Dimension(673, 768));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -121,11 +122,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/save.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        savePassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        savePassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/save.png"))); // NOI18N
+        savePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                savePasswordActionPerformed(evt);
             }
         });
 
@@ -142,44 +143,45 @@ public class Main extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cypher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(savePassword))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(clean, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(openFolder))))
-                .addContainerGap())
+                        .addComponent(clean, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(openFolder))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clean, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(clean, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(openFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(savePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cypher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90))
+                .addGap(62, 62, 62))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptograma / Texto decifrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
@@ -217,43 +219,62 @@ public class Main extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(copyToClipBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(copyToClipBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveResult, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(saveResult, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(copyToClipBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveResult, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        copyCryptogram.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        copyCryptogram.setText("<<");
+        copyCryptogram.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        copyCryptogram.setMaximumSize(new java.awt.Dimension(32, 32));
+        copyCryptogram.setMinimumSize(new java.awt.Dimension(32, 32));
+        copyCryptogram.setPreferredSize(new java.awt.Dimension(32, 32));
+        copyCryptogram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyCryptogramActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(copyCryptogram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 724, Short.MAX_VALUE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(copyCryptogram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -267,73 +288,38 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void copyToClipBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyToClipBoardActionPerformed
-        copyToClipBoard();
-    }//GEN-LAST:event_copyToClipBoardActionPerformed
-
-    private void cleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanActionPerformed
-        inputText.setText("");
-    }//GEN-LAST:event_cleanActionPerformed
-
-    private void keyGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyGenerateActionPerformed
-        keyGenerate();
-    }//GEN-LAST:event_keyGenerateActionPerformed
-
     private void saveResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveResultActionPerformed
         // TODO add your handling code here:
         if (!outputText.getText().isEmpty()) {
             createFileTxt(outputText.getText(), "Result");
+
         } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio");
         }
     }//GEN-LAST:event_saveResultActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void copyToClipBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyToClipBoardActionPerformed
+        copyToClipBoard();
+    }//GEN-LAST:event_copyToClipBoardActionPerformed
+
+    private void openFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderActionPerformed
+        openFileTxt();
+    }//GEN-LAST:event_openFolderActionPerformed
+
+    private void savePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePasswordActionPerformed
         // TODO add your handling code here:
         if (!password.getText().isEmpty()) {
             createFileTxt(password.getText(), "Password");
         } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio \npor favor genere una contraseña");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void openFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderActionPerformed
-        openFileTxt();
-    }//GEN-LAST:event_openFolderActionPerformed
-
-    private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
-        // TODO add your handling code here:
-        if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
-            int[][] arrayText = arrayText(inputText.getText());
-            String cryptograma = "";
-            for (int[] fila : arrayText) {
-                System.out.println();
-                int[] text = new int[16];
-                int i = 0;
-                for (int col : fila) {
-                    text[i] = col;
-                    i++;
-                }
-                cryptograma += cifrar(text, arrayPassword(password.getText()));
-
-            }
-
-            outputText.setText(cryptograma);
-        } else {
-            JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
-        }
-
-    }//GEN-LAST:event_cypherActionPerformed
+    }//GEN-LAST:event_savePasswordActionPerformed
 
     private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
         // TODO add your handling code here:
@@ -358,8 +344,46 @@ public class Main extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
         }
-
     }//GEN-LAST:event_decipherActionPerformed
+
+    private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
+        // TODO add your handling code here:
+        if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
+            int[][] arrayText = arrayText(inputText.getText());
+            String cryptograma = "";
+            for (int[] fila : arrayText) {
+                System.out.println();
+                int[] text = new int[16];
+                int i = 0;
+                for (int col : fila) {
+                    text[i] = col;
+                    i++;
+                }
+                cryptograma += cifrar(text, arrayPassword(password.getText()));
+
+            }
+
+            outputText.setText(cryptograma);
+        } else {
+            JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
+        }
+    }//GEN-LAST:event_cypherActionPerformed
+
+    private void keyGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyGenerateActionPerformed
+        keyGenerate();
+    }//GEN-LAST:event_keyGenerateActionPerformed
+
+    private void cleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanActionPerformed
+        inputText.setText("");
+    }//GEN-LAST:event_cleanActionPerformed
+
+    private void copyCryptogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyCryptogramActionPerformed
+        // TODO add your handling code here:
+        if (!outputText.getText().isEmpty()) {
+            inputText.setText(outputText.getText());
+            outputText.setText("");
+        }
+    }//GEN-LAST:event_copyCryptogramActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +405,7 @@ public class Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -392,11 +416,11 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clean;
+    private javax.swing.JButton copyCryptogram;
     private javax.swing.JButton copyToClipBoard;
     private javax.swing.JButton cypher;
     private javax.swing.JButton decipher;
     private javax.swing.JTextArea inputText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -406,6 +430,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton openFolder;
     private javax.swing.JTextArea outputText;
     private javax.swing.JTextField password;
+    private javax.swing.JButton savePassword;
     private javax.swing.JButton saveResult;
     // End of variables declaration//GEN-END:variables
 
@@ -502,10 +527,11 @@ public class Main extends javax.swing.JFrame {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                String hex = String.format("%02x", texto[j][i]);
-                int dec = Integer.parseInt(hex, 16);
-                text += (char) dec;
-
+                if (0 != texto[j][i]) {
+                    String hex = String.format("%02x", texto[j][i]);
+                    int dec = Integer.parseInt(hex, 16);
+                    text += (char) dec;
+                }
             }
         }
 
@@ -607,6 +633,11 @@ public class Main extends javax.swing.JFrame {
                         bfwriter.close();
                         exist = true;
                         JOptionPane.showMessageDialog(null, "El archivo se guardo con exito.");
+                        if (nameFile.equals("Result")) {
+                            outputText.setText("");
+                        } else if (nameFile.equals("Password")) {
+                            password.setText("");
+                        }
                     } else {
                         exist = false;
                         JOptionPane.showMessageDialog(null, "El archivo que estas intentando crear ya existe.");
