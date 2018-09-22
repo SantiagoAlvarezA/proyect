@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package encrypkarch;
 
+import java.awt.Event;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,12 +14,14 @@ import java.io.IOException;
 import static java.lang.Math.ceil;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
+import javax.swing.InputMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 /**
  *
- * @author Alvar
+ * @author Santiago
  */
 public class Main extends javax.swing.JFrame {
 
@@ -35,6 +34,8 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         inputText.setLineWrap(true);
         outputText.setLineWrap(true);
+        InputMap map2 = password.getInputMap(password.WHEN_FOCUSED);
+        map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
     }
 
     /**
@@ -94,6 +95,14 @@ public class Main extends javax.swing.JFrame {
 
         password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         password.setToolTipText("Password");
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passwordKeyTyped(evt);
+            }
+        });
 
         keyGenerate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         keyGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/key.png"))); // NOI18N
@@ -322,7 +331,6 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_savePasswordActionPerformed
 
     private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
-        // TODO add your handling code here:
         if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
             int[][] arrayText = arrayCryptogram(inputText.getText());
 
@@ -347,7 +355,6 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_decipherActionPerformed
 
     private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
-        // TODO add your handling code here:
         if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
             int[][] arrayText = arrayText(inputText.getText());
             String cryptograma = "";
@@ -378,12 +385,25 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cleanActionPerformed
 
     private void copyCryptogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyCryptogramActionPerformed
-        // TODO add your handling code here:
         if (!outputText.getText().isEmpty()) {
             inputText.setText(outputText.getText());
             outputText.setText("");
         }
     }//GEN-LAST:event_copyCryptogramActionPerformed
+
+    private void passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyTyped
+        // TODO add your handling code here:
+
+        if (password.getText().length() == 16) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_passwordKeyTyped
+
+    private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
+        // TODO add your handling code here:
+        //                
+
+    }//GEN-LAST:event_passwordKeyPressed
 
     /**
      * @param args the command line arguments
@@ -457,7 +477,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     public int[][] arrayCryptogram(String text) {
-        // int  dec = Integer.parseInt(hex, 16);
         String[] texto = new String[text.length() / 2];
         int t = 0;
         for (int i = 0; i < text.length();) {
@@ -498,10 +517,8 @@ public class Main extends javax.swing.JFrame {
 
         byte[] mClaveExp = new byte[256];
 
-        int[] clave = passwd;//{0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69, 0x61, 0x6e, 0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69}; //clave
-
-        int[] arrTexto = crypt;//{0x70,  0xa7,  0xbc,  0xdd,  0x79,  0x30,  0x84,  0xd1,  0x68,  0x81,  0xd8,  0x01,  0xa9,  0x54,  0xd4,  0xae};
-
+        int[] clave = passwd;
+        int[] arrTexto = crypt;
         byte[][] texto = new byte[4][4];
         byte[][] mClave = new byte[4][4];
 
@@ -544,8 +561,7 @@ public class Main extends javax.swing.JFrame {
         Cifrado c = new Cifrado();
         byte[] mClaveExp = new byte[256];
 
-        int[] clave = passwd;//{0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69, 0x61, 0x6e, 0x63, 0x68, 0x72, 0x69, 0x73, 0x74, 0x69}; //clave
-
+        int[] clave = passwd;
         int[] arrTexto = tex;
 
         byte[][] texto = new byte[4][4];
@@ -582,15 +598,6 @@ public class Main extends javax.swing.JFrame {
         return cryptograma;
     }
 
-    /*
-    public static String fromHexString(String hex) {
-        StringBuilder str = new StringBuilder();
-        for (int i = 0; i < hex.length(); i += 2) {
-            str.append((char) Integer.parseInt(hex.substring(i, i + 2), 16));
-        }
-        return str.toString();
-    }
-     */
     //metodo para copiar el resultado al clipboard
     public void copyToClipBoard() {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -688,8 +695,6 @@ public class Main extends javax.swing.JFrame {
             } else {
                 open = true;
             }
-
         }
     }
-
 }

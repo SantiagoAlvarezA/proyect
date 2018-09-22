@@ -189,14 +189,6 @@ public class Operaciones {
             }
         }
 
-//        System.out.print("\n R");
-//        System.out.print(pos);
-//        System.out.print(" (SUBCLAVE = ");
-//        for (int i = 0; i < 16; i++) {
-//
-//            System.out.printf("%02x", mClaveExp[pos * 16 + i]); //mostramos la subclave
-//        }
-
         for (int i = 0; i < 16; i++) {
             copia[i] ^= mClaveExp[pos * 16 + i];
             //sumamos bit a bit: byte de subclave y byte de texto
@@ -210,14 +202,7 @@ public class Operaciones {
                 k++;
             }
         }
-//
-//        System.out.print(") = ");
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 0; j < 4; j++) {
-//                System.out.printf("%02x", texto[j][i]); //mostramos resultado final
-//            }
-//        }
-//        System.out.print("\n");
+
     }
 
     // operacion subBytes
