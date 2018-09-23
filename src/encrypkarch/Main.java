@@ -52,12 +52,13 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         inputText = new javax.swing.JTextArea();
         clean = new javax.swing.JButton();
-        password = new javax.swing.JTextField();
         keyGenerate = new javax.swing.JButton();
         cypher = new javax.swing.JButton();
         decipher = new javax.swing.JButton();
         savePassword = new javax.swing.JButton();
         openFolder = new javax.swing.JButton();
+        password = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         outputText = new javax.swing.JTextArea();
@@ -90,17 +91,6 @@ public class Main extends javax.swing.JFrame {
         clean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cleanActionPerformed(evt);
-            }
-        });
-
-        password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        password.setToolTipText("Password");
-        password.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                passwordKeyTyped(evt);
             }
         });
 
@@ -146,29 +136,49 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        password.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passwordKeyTyped(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/folderPassword.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cypher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(savePassword))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(password)
+                            .addComponent(cypher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(savePassword))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(clean, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(openFolder))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(clean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
+                        .addComponent(openFolder)))
+                .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,16 +191,16 @@ public class Main extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(openFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(savePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(keyGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(savePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(password))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cypher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+                .addGap(49, 49, 49))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptograma / Texto decifrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
@@ -306,7 +316,7 @@ public class Main extends javax.swing.JFrame {
     private void saveResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveResultActionPerformed
         // TODO add your handling code here:
         if (!outputText.getText().isEmpty()) {
-            createFileTxt(outputText.getText(), "Result");
+            createFileTxt(outputText.getText(), "Result.txt");
 
         } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio");
@@ -318,32 +328,44 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_copyToClipBoardActionPerformed
 
     private void openFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderActionPerformed
-        openFileTxt();
+        openFileTxt("input");
     }//GEN-LAST:event_openFolderActionPerformed
 
     private void savePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePasswordActionPerformed
         // TODO add your handling code here:
-        if (!password.getText().isEmpty()) {
-            createFileTxt(password.getText(), "Password");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio \npor favor genere una contraseña");
-        }
-    }//GEN-LAST:event_savePasswordActionPerformed
+        if (!(String.valueOf(password.getPassword())).isEmpty()) {
+            String passwT = "";
+            String passwd = JOptionPane.showInputDialog("Digite una contraseña");
 
-    private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
-        if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
-            int[][] arrayText = arrayCryptogram(inputText.getText());
-
-            String texto = "";
+            int[][] arrayText = arrayText(String.valueOf(password.getPassword()));
             for (int[] fila : arrayText) {
-                System.out.println();
                 int[] text = new int[16];
                 int i = 0;
                 for (int col : fila) {
                     text[i] = col;
                     i++;
                 }
-                texto += descifrar(text, arrayPassword(password.getText()));
+                passwT += cifrar(text, arrayPassword(passwd));
+            }
+            createFileTxt(passwT, ".password");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio \npor favor genere una contraseña");
+        }
+    }//GEN-LAST:event_savePasswordActionPerformed
+
+    private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
+        if (!inputText.getText().isEmpty() && !(String.valueOf(password.getPassword())).isEmpty()) {
+            int[][] arrayText = arrayCryptogram(inputText.getText());
+
+            String texto = "";
+            for (int[] fila : arrayText) {
+                int[] text = new int[16];
+                int i = 0;
+                for (int col : fila) {
+                    text[i] = col;
+                    i++;
+                }
+                texto += descifrar(text, arrayPassword(String.valueOf(password.getPassword())));
 
             }
 
@@ -355,18 +377,17 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_decipherActionPerformed
 
     private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
-        if (!inputText.getText().isEmpty() && !password.getText().isEmpty()) {
+        if (!inputText.getText().isEmpty() && !(String.valueOf(password.getPassword())).isEmpty()) {
             int[][] arrayText = arrayText(inputText.getText());
             String cryptograma = "";
             for (int[] fila : arrayText) {
-                System.out.println();
                 int[] text = new int[16];
                 int i = 0;
                 for (int col : fila) {
                     text[i] = col;
                     i++;
                 }
-                cryptograma += cifrar(text, arrayPassword(password.getText()));
+                cryptograma += cifrar(text, arrayPassword(String.valueOf(password.getPassword())));
 
             }
 
@@ -392,18 +413,20 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_copyCryptogramActionPerformed
 
     private void passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyTyped
-        // TODO add your handling code here:
-
-        if (password.getText().length() == 16) {
+        if ((String.valueOf(password.getPassword())).length() == 16) {
             evt.consume();
+            JOptionPane.showMessageDialog(null, (String.valueOf(password.getPassword())));
         }
     }//GEN-LAST:event_passwordKeyTyped
 
     private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
         // TODO add your handling code here:
-        //                
-
     }//GEN-LAST:event_passwordKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        openFileTxt("password");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,6 +464,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton cypher;
     private javax.swing.JButton decipher;
     private javax.swing.JTextArea inputText;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -449,14 +473,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton keyGenerate;
     private javax.swing.JButton openFolder;
     private javax.swing.JTextArea outputText;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JButton savePassword;
     private javax.swing.JButton saveResult;
     // End of variables declaration//GEN-END:variables
 
     public int[][] arrayText(String text) {
 
-        byte[] arrayByte = text.getBytes();
+        byte[] arrayByte = text.getBytes(StandardCharsets.UTF_8);
 
         //bloques de 16 bytes para el texto**********
         int[][] arrayBlok = new int[(int) ceil(arrayByte.length / 16.0)][16];
@@ -481,6 +505,7 @@ public class Main extends javax.swing.JFrame {
         int t = 0;
         for (int i = 0; i < text.length();) {
             texto[t] = text.substring(i, i + 2);
+
             i = i + 2;
             t++;
         }
@@ -589,10 +614,8 @@ public class Main extends javax.swing.JFrame {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-
                 String hex = String.format("%02x", texto[j][i]);
-                cryptograma += hex;//dec + " ";
-
+                cryptograma += hex;
             }
         }
         return cryptograma;
@@ -631,7 +654,7 @@ public class Main extends javax.swing.JFrame {
 
                 JFileChooser jFileChooser = new javax.swing.JFileChooser();
                 if (jFileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    path = jFileChooser.getSelectedFile().getAbsolutePath() + nameFile + ".txt";
+                    path = jFileChooser.getSelectedFile().getAbsolutePath() + nameFile;
                     File file = new File(path);
                     if (!file.exists()) {
                         flwriter = new FileWriter(path);
@@ -667,7 +690,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    public void openFileTxt() {
+    public void openFileTxt(String type) {
         String path;
         BufferedReader bufferedReader;
         String readLine;
@@ -681,10 +704,36 @@ public class Main extends javax.swing.JFrame {
                 try {
                     bufferedReader = new BufferedReader(new FileReader(new File(path)));
                     readLine = bufferedReader.readLine();
-                    while (readLine != null) {
-                        inputText.append(readLine);
-                        readLine = bufferedReader.readLine();
 
+                    switch (type) {
+                        case "input":
+
+                            while (readLine != null) {
+                                inputText.append(readLine);
+                                readLine = bufferedReader.readLine();
+                            }
+                            break;
+                        case "password":
+                            password.setText("");
+                            String hex = "";
+                            while (readLine != null) {
+                                hex += readLine;
+                                readLine = bufferedReader.readLine();
+                            }
+                            int[][] arrayText = arrayCryptogram(hex);
+                            String pass = JOptionPane.showInputDialog("Ingrese su contraseña");
+                            String texto = "";
+                            for (int[] fila : arrayText) {
+                                int[] text = new int[16];
+                                int i = 0;
+                                for (int col : fila) {
+                                    text[i] = col;
+                                    i++;
+                                }
+                                texto += descifrar(text, arrayPassword(pass));
+                            }
+                            password.setText(texto);
+                            break;
                     }
                     open = true;
                 } catch (IOException e) {
