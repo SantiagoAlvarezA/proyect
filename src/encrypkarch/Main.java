@@ -355,22 +355,23 @@ public class Main extends javax.swing.JFrame {
 
     private void decipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decipherActionPerformed
         if (!inputText.getText().isEmpty() && !(String.valueOf(password.getPassword())).isEmpty()) {
-            int[][] arrayText = arrayCryptogram(inputText.getText());
+            try {
+                int[][] arrayText = arrayCryptogram(inputText.getText());
+                String texto = "";
+                for (int[] fila : arrayText) {
+                    int[] text = new int[16];
+                    int i = 0;
+                    for (int col : fila) {
+                        text[i] = col;
+                        i++;
+                    }
+                    texto += descifrar(text, arrayPassword(String.valueOf(password.getPassword())));
 
-            String texto = "";
-            for (int[] fila : arrayText) {
-                int[] text = new int[16];
-                int i = 0;
-                for (int col : fila) {
-                    text[i] = col;
-                    i++;
                 }
-                texto += descifrar(text, arrayPassword(String.valueOf(password.getPassword())));
-
+                outputText.setText(texto);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El criptograma ingresado es inconsistente");
             }
-
-            outputText.setText(texto);
-
         } else {
             JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
         }
@@ -387,7 +388,11 @@ public class Main extends javax.swing.JFrame {
                     text[i] = col;
                     i++;
                 }
-                cryptograma += cifrar(text, arrayPassword(String.valueOf(password.getPassword())));
+                try {
+                    cryptograma += cifrar(text, arrayPassword(String.valueOf(password.getPassword())));
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
 
             }
 
@@ -415,7 +420,6 @@ public class Main extends javax.swing.JFrame {
     private void passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyTyped
         if ((String.valueOf(password.getPassword())).length() == 16) {
             evt.consume();
-            JOptionPane.showMessageDialog(null, (String.valueOf(password.getPassword())));
         }
     }//GEN-LAST:event_passwordKeyTyped
 
@@ -496,7 +500,6 @@ public class Main extends javax.swing.JFrame {
                 jArrayBytes = 0;
             }
         }
-
         return arrayBlok;
     }
 
@@ -514,8 +517,10 @@ public class Main extends javax.swing.JFrame {
 
         for (int i = 0; i < texto.length; i++) {
             if (jArrayBytes < 16) {
+
                 arrayBlok[iArrayBytes][jArrayBytes] = Integer.parseInt(texto[i], 16);
                 jArrayBytes++;
+
             } else {
                 iArrayBytes++;
                 i--;
@@ -633,9 +638,8 @@ public class Main extends javax.swing.JFrame {
         String pass = "";
         for (int i = 0; i < 16;) {
 
-            int numero = (random.nextInt(256));
-            if (numero > 31 && numero < 127) {
-
+            int numero = (random.nextInt(126));
+            if (numero > 31) {
                 pass += (char) numero;
                 i++;
             }
