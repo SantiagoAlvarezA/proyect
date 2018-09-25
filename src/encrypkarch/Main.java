@@ -36,7 +36,7 @@ public class Main extends javax.swing.JFrame {
         outputText.setLineWrap(true);
         InputMap map2 = password.getInputMap(password.WHEN_FOCUSED);
         map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
-         
+
     }
 
     /**
@@ -403,7 +403,7 @@ public class Main extends javax.swing.JFrame {
         if (!outputText.getText().isEmpty()) {
             createFileTxt(outputText.getText(), "Result.txt");
 
-        } else { 
+        } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio");
         }
     }//GEN-LAST:event_saveResultActionPerformed
@@ -529,7 +529,7 @@ public class Main extends javax.swing.JFrame {
 
     private void openFolderMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openFolderMouseMoved
         // TODO add your handling code here:
-        openFolder.setToolTipText("Abrir un archivo txt para cifrar o decifrar"); 
+        openFolder.setToolTipText("Abrir un archivo txt para cifrar o decifrar");
     }//GEN-LAST:event_openFolderMouseMoved
 
     private void cypherMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cypherMouseMoved
@@ -550,7 +550,7 @@ public class Main extends javax.swing.JFrame {
     private void openPasswordMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openPasswordMouseMoved
         // TODO add your handling code here:
         openPassword.setToolTipText("Abrir un archivo .password para cargar la contraseña de cifrado");
-                
+
     }//GEN-LAST:event_openPasswordMouseMoved
 
     private void cleanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleanMouseMoved
@@ -588,12 +588,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_eyeMouseMoved
 
     private void eyeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eyeActionPerformed
-         // TODO add your handling code here:
-         if (eye.getModel().isSelected()){
-             password.setEchoChar((char)0); 
-         }else{
-             password.setEchoChar('*');
-         }
+        // TODO add your handling code here:
+        if (eye.getModel().isSelected()) {
+            password.setEchoChar((char) 0);
+        } else {
+            password.setEchoChar('*');
+        }
     }//GEN-LAST:event_eyeActionPerformed
 
     /**
