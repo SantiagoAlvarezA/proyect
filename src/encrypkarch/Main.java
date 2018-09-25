@@ -84,6 +84,11 @@ public class Main extends javax.swing.JFrame {
         inputText.setColumns(10);
         inputText.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         inputText.setRows(5);
+        inputText.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                inputTextMouseMoved(evt);
+            }
+        });
         jScrollPane1.setViewportView(inputText);
 
         clean.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -254,6 +259,11 @@ public class Main extends javax.swing.JFrame {
         outputText.setColumns(20);
         outputText.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         outputText.setRows(5);
+        outputText.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                outputTextMouseMoved(evt);
+            }
+        });
         jScrollPane3.setViewportView(outputText);
 
         copyToClipBoard.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -543,6 +553,16 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         copyCryptogram.setToolTipText("Pasar el contenido de [Criptograma / Texto descifrado]  a Texto original");
     }//GEN-LAST:event_copyCryptogramMouseMoved
+
+    private void inputTextMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputTextMouseMoved
+        // TODO add your handling code here:
+        inputText.setToolTipText("Digite aquí el texto que desea cifrar o el criptograma que va a decifrar");
+    }//GEN-LAST:event_inputTextMouseMoved
+
+    private void outputTextMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outputTextMouseMoved
+        // TODO add your handling code here:
+        outputText.setToolTipText("Aqui se muestra el texto cifrado (Criptograma) o el resultado de haber descifrado un criptograma");
+    }//GEN-LAST:event_outputTextMouseMoved
 
     /**
      * @param args the command line arguments
