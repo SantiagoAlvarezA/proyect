@@ -58,7 +58,7 @@ public class Main extends javax.swing.JFrame {
         savePassword = new javax.swing.JButton();
         openFolder = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        openPassword = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         outputText = new javax.swing.JTextArea();
@@ -88,6 +88,11 @@ public class Main extends javax.swing.JFrame {
 
         clean.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         clean.setText("Limpiar");
+        clean.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cleanMouseMoved(evt);
+            }
+        });
         clean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cleanActionPerformed(evt);
@@ -97,6 +102,11 @@ public class Main extends javax.swing.JFrame {
         keyGenerate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         keyGenerate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/key.png"))); // NOI18N
         keyGenerate.setText("Generar una contraseña");
+        keyGenerate.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                keyGenerateMouseMoved(evt);
+            }
+        });
         keyGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 keyGenerateActionPerformed(evt);
@@ -106,6 +116,11 @@ public class Main extends javax.swing.JFrame {
         cypher.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cypher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/crypto.png"))); // NOI18N
         cypher.setText("Cifrar");
+        cypher.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cypherMouseMoved(evt);
+            }
+        });
         cypher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cypherActionPerformed(evt);
@@ -115,6 +130,11 @@ public class Main extends javax.swing.JFrame {
         decipher.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         decipher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/decrypt.png"))); // NOI18N
         decipher.setText("Descifrar");
+        decipher.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                decipherMouseMoved(evt);
+            }
+        });
         decipher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 decipherActionPerformed(evt);
@@ -123,6 +143,11 @@ public class Main extends javax.swing.JFrame {
 
         savePassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         savePassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/save.png"))); // NOI18N
+        savePassword.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                savePasswordMouseMoved(evt);
+            }
+        });
         savePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 savePasswordActionPerformed(evt);
@@ -130,6 +155,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         openFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/openFolder.png"))); // NOI18N
+        openFolder.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                openFolderMouseMoved(evt);
+            }
+        });
         openFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openFolderActionPerformed(evt);
@@ -137,6 +167,12 @@ public class Main extends javax.swing.JFrame {
         });
 
         password.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        password.setToolTipText("");
+        password.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                passwordMouseMoved(evt);
+            }
+        });
         password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordKeyPressed(evt);
@@ -146,10 +182,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/folderPassword.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        openPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/folderPassword.png"))); // NOI18N
+        openPassword.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                openPasswordMouseMoved(evt);
+            }
+        });
+        openPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                openPasswordActionPerformed(evt);
             }
         });
 
@@ -169,7 +210,7 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(openPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
@@ -192,7 +233,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(openFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(openPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(keyGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                     .addComponent(savePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(password))
@@ -203,7 +244,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptograma / Texto decifrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptograma / Texto descifrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
         jPanel3.setPreferredSize(new java.awt.Dimension(665, 768));
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -218,6 +259,11 @@ public class Main extends javax.swing.JFrame {
         copyToClipBoard.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         copyToClipBoard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/copy.png"))); // NOI18N
         copyToClipBoard.setText("Copiar");
+        copyToClipBoard.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                copyToClipBoardMouseMoved(evt);
+            }
+        });
         copyToClipBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copyToClipBoardActionPerformed(evt);
@@ -227,6 +273,11 @@ public class Main extends javax.swing.JFrame {
         saveResult.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         saveResult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/save.png"))); // NOI18N
         saveResult.setText("Guardar");
+        saveResult.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                saveResultMouseMoved(evt);
+            }
+        });
         saveResult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveResultActionPerformed(evt);
@@ -264,6 +315,11 @@ public class Main extends javax.swing.JFrame {
         copyCryptogram.setMaximumSize(new java.awt.Dimension(32, 32));
         copyCryptogram.setMinimumSize(new java.awt.Dimension(32, 32));
         copyCryptogram.setPreferredSize(new java.awt.Dimension(32, 32));
+        copyCryptogram.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                copyCryptogramMouseMoved(evt);
+            }
+        });
         copyCryptogram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copyCryptogramActionPerformed(evt);
@@ -289,7 +345,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(249, 249, 249)
                 .addComponent(copyCryptogram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -427,10 +483,66 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void openPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPasswordActionPerformed
         // TODO add your handling code here:
         openFileTxt("password");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_openPasswordActionPerformed
+
+    private void keyGenerateMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keyGenerateMouseMoved
+        // TODO add your handling code here:
+        keyGenerate.setToolTipText("Crea una contraseña segura para cifrar un texto");
+    }//GEN-LAST:event_keyGenerateMouseMoved
+
+    private void savePasswordMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savePasswordMouseMoved
+        // TODO add your handling code here:
+        savePassword.setToolTipText("Guardar la contraseña");
+    }//GEN-LAST:event_savePasswordMouseMoved
+
+    private void openFolderMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openFolderMouseMoved
+        // TODO add your handling code here:
+        openFolder.setToolTipText("Abrir un archivo txt para cifrar o decifrar"); 
+    }//GEN-LAST:event_openFolderMouseMoved
+
+    private void cypherMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cypherMouseMoved
+        // TODO add your handling code here
+        cypher.setToolTipText("Cifra un texto usando una contraseña");
+    }//GEN-LAST:event_cypherMouseMoved
+
+    private void decipherMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_decipherMouseMoved
+        // TODO add your handling code here:
+        decipher.setToolTipText("Descifra un criptograma usando la contraseña que utilizo para cifrar");
+    }//GEN-LAST:event_decipherMouseMoved
+
+    private void passwordMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseMoved
+        // TODO add your handling code here:
+        password.setToolTipText("Digite una contraseña segura");
+    }//GEN-LAST:event_passwordMouseMoved
+
+    private void openPasswordMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openPasswordMouseMoved
+        // TODO add your handling code here:
+        openPassword.setToolTipText("Abrir un archivo .password para cargar la contraseña de cifrado");
+                
+    }//GEN-LAST:event_openPasswordMouseMoved
+
+    private void cleanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cleanMouseMoved
+        // TODO add your handling code here:
+        clean.setToolTipText("Limpiar el campo de texto original");
+    }//GEN-LAST:event_cleanMouseMoved
+
+    private void copyToClipBoardMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_copyToClipBoardMouseMoved
+        // TODO add your handling code here:
+        copyToClipBoard.setToolTipText("Copiar al portapapeles el contenido [Criptograma / Texto descifrado]");
+    }//GEN-LAST:event_copyToClipBoardMouseMoved
+
+    private void saveResultMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveResultMouseMoved
+        // TODO add your handling code here:
+        saveResult.setToolTipText("Guardar el contenido [Criptograma / Texto descifrado] en un archivo txt");
+    }//GEN-LAST:event_saveResultMouseMoved
+
+    private void copyCryptogramMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_copyCryptogramMouseMoved
+        // TODO add your handling code here:
+        copyCryptogram.setToolTipText("Pasar el contenido de [Criptograma / Texto descifrado]  a Texto original");
+    }//GEN-LAST:event_copyCryptogramMouseMoved
 
     /**
      * @param args the command line arguments
@@ -468,7 +580,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton cypher;
     private javax.swing.JButton decipher;
     private javax.swing.JTextArea inputText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -476,6 +587,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton keyGenerate;
     private javax.swing.JButton openFolder;
+    private javax.swing.JButton openPassword;
     private javax.swing.JTextArea outputText;
     private javax.swing.JPasswordField password;
     private javax.swing.JButton savePassword;
