@@ -36,6 +36,7 @@ public class Main extends javax.swing.JFrame {
         outputText.setLineWrap(true);
         InputMap map2 = password.getInputMap(password.WHEN_FOCUSED);
         map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
+         
     }
 
     /**
@@ -59,6 +60,7 @@ public class Main extends javax.swing.JFrame {
         openFolder = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
         openPassword = new javax.swing.JButton();
+        eye = new javax.swing.JToggleButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         outputText = new javax.swing.JTextArea();
@@ -199,6 +201,19 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        eye.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypkarch/Icons/eye.png"))); // NOI18N
+        eye.setAlignmentY(0.0F);
+        eye.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                eyeMouseMoved(evt);
+            }
+        });
+        eye.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eyeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -209,15 +224,18 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(password)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(eye, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(password))
                             .addComponent(cypher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(openPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(keyGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(keyGenerate)
                                 .addGap(26, 26, 26)
                                 .addComponent(savePassword))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -238,15 +256,16 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(openFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(eye, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(openPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(keyGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(keyGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(savePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(password))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cypher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(decipher, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                .addGap(59, 59, 59))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptograma / Texto descifrado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Rounded MT Bold", 0, 18))); // NOI18N
@@ -384,7 +403,7 @@ public class Main extends javax.swing.JFrame {
         if (!outputText.getText().isEmpty()) {
             createFileTxt(outputText.getText(), "Result.txt");
 
-        } else {
+        } else { 
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio");
         }
     }//GEN-LAST:event_saveResultActionPerformed
@@ -564,6 +583,19 @@ public class Main extends javax.swing.JFrame {
         outputText.setToolTipText("Aqui se muestra el texto cifrado (Criptograma) o el resultado de haber descifrado un criptograma");
     }//GEN-LAST:event_outputTextMouseMoved
 
+    private void eyeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eyeMouseMoved
+        eye.setToolTipText("Ocultar o mostrar la contraseña");
+    }//GEN-LAST:event_eyeMouseMoved
+
+    private void eyeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eyeActionPerformed
+         // TODO add your handling code here:
+         if (eye.getModel().isSelected()){
+             password.setEchoChar((char)0); 
+         }else{
+             password.setEchoChar('*');
+         }
+    }//GEN-LAST:event_eyeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -599,6 +631,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton copyToClipBoard;
     private javax.swing.JButton cypher;
     private javax.swing.JButton decipher;
+    private javax.swing.JToggleButton eye;
     private javax.swing.JTextArea inputText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
