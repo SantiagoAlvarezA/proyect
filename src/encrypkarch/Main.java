@@ -88,6 +88,7 @@ public class Main extends javax.swing.JFrame {
         inputText.setColumns(10);
         inputText.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         inputText.setRows(5);
+        inputText.setMinimumSize(new java.awt.Dimension(500, 350));
         inputText.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 inputTextMouseMoved(evt);
@@ -726,11 +727,25 @@ public class Main extends javax.swing.JFrame {
     }
 
     public int[] arrayPassword(String text) {
-        byte[] arrayByte = text.getBytes(StandardCharsets.UTF_8);
-        int[] array = new int[16];
-        for (int i = 0; i < arrayByte.length; i++) {
-            array[i] = arrayByte[i];
+        CifradoClave cifradoClave = new CifradoClave();
+        char[] clave = new char[16];
+        for (int i = 0; i < text.length(); i++) {
+            clave[i] = text.charAt(i);
         }
+
+        byte[][] arrTexto = new byte[4][4];
+        for (int i = 0; i < 4; i++) {
+
+            for (int j = 0; j < 4; j++) {
+                arrTexto[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
+
+            }
+        }
+
+        cifradoClave.encriptar_cave(arrTexto);
+
+        int[] array = cifradoClave.getClave();
+        
         return array;
     }
 
