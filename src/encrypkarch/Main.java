@@ -505,7 +505,17 @@ public class Main extends javax.swing.JFrame {
 
             }
 
+            
+            
+            
+            
+            
             outputText.setText(cryptograma);
+            
+            
+            
+            
+            
         } else {
             JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
         }
