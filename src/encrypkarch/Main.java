@@ -18,6 +18,7 @@ import javax.swing.InputMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -505,17 +506,8 @@ public class Main extends javax.swing.JFrame {
 
             }
 
-            
-            
-            
-            
-            
             outputText.setText(cryptograma);
-            
-            
-            
-            
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
         }
@@ -755,7 +747,7 @@ public class Main extends javax.swing.JFrame {
         cifradoClave.encriptar_cave(arrTexto);
 
         int[] array = cifradoClave.getClave();
-        
+
         return array;
     }
 
@@ -921,6 +913,10 @@ public class Main extends javax.swing.JFrame {
         boolean open = false;
         while (!open) {
             JFileChooser jFileChooser = new JFileChooser();
+            //filtrar el tipo de archivos que se pueden abrir
+            FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("txt, password", "password", "txt");
+            jFileChooser.setFileFilter(fileNameExtensionFilter);
+
             if (jFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 inputText.setText("");
                 path = jFileChooser.getSelectedFile().getAbsolutePath();
