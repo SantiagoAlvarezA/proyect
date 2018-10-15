@@ -913,8 +913,13 @@ public class Main extends javax.swing.JFrame {
         boolean open = false;
         while (!open) {
             JFileChooser jFileChooser = new JFileChooser();
+            FileNameExtensionFilter fileNameExtensionFilter = null;
             //filtrar el tipo de archivos que se pueden abrir
-            FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("txt, password", "password", "txt");
+            if (type.equals("password")) {
+                fileNameExtensionFilter = new FileNameExtensionFilter("password", "password");
+            } else {
+                fileNameExtensionFilter = new FileNameExtensionFilter("txt, password", "password", "txt");
+            }
             jFileChooser.setFileFilter(fileNameExtensionFilter);
 
             if (jFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
