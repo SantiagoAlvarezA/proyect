@@ -640,7 +640,7 @@ public class Main extends javax.swing.JFrame {
     private void manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualActionPerformed
         // TODO add your handling code here:
 
-        showManual();
+        showManual("C:\\Universidad\\Tesis\\Algoritmo\\Prototipos\\EncrypKarch\\src\\encrypkarch\\Documents\\manual.pdf", "Manual de usuario");
 
 
     }//GEN-LAST:event_manualActionPerformed
@@ -989,7 +989,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    public void showManual() {
+    public void showManual(String route, String title) {
 
         JPanel panel = new JPanel();
         PagePanel panelpdf = new PagePanel();
@@ -1007,17 +1007,18 @@ public class Main extends javax.swing.JFrame {
 
         try {
             //File file = new File ("\\src\\encrypkarch\\Documents\\manual.pdf");
-            File file = new File("C:\\Universidad\\Tesis\\Algoritmo\\Prototipos\\EncrypKarch\\src\\encrypkarch\\Documents\\manual.pdf");
+            File file = new File(route);
             RandomAccessFile raf = new RandomAccessFile(file, "r");
             FileChannel channel = raf.getChannel();
             ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
             pdffile = new PDFFile(buf);
             PDFPage page = pdffile.getPage(indice);
-            panelpdf.setToolTipText("Manual de usuario");
+            panelpdf.setToolTipText(title);
             panelpdf.setBackground(Color.LIGHT_GRAY);
             panelpdf.setSize(1, 1);
+
             panelpdf.showPage(page);
-            
+            panelpdf.repaint();
             back.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1026,6 +1027,7 @@ public class Main extends javax.swing.JFrame {
                         indice--;
                         PDFPage page = pdffile.getPage(indice);
                         panelpdf.showPage(page);
+                        panelpdf.repaint();
                     }
 
                 }
@@ -1039,6 +1041,7 @@ public class Main extends javax.swing.JFrame {
                         indice++;
                         PDFPage page = pdffile.getPage(indice);
                         panelpdf.showPage(page);
+                        panelpdf.repaint();
                     }
 
                 }
