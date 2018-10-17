@@ -1,22 +1,36 @@
 package encrypkarch;
 
+import com.sun.pdfview.PDFFile;
+import com.sun.pdfview.PDFPage;
+import com.sun.pdfview.PagePanel;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import static java.lang.Math.ceil;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -26,6 +40,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Main extends javax.swing.JFrame {
 
+    int indice = 1;
     Random random = new Random();
 
     /**
@@ -624,6 +639,10 @@ public class Main extends javax.swing.JFrame {
 
     private void manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualActionPerformed
         // TODO add your handling code here:
+
+        showManual();
+
+
     }//GEN-LAST:event_manualActionPerformed
 
     /**
@@ -931,7 +950,6 @@ public class Main extends javax.swing.JFrame {
 
                     switch (type) {
                         case "input":
-
                             while (readLine != null) {
                                 inputText.append(readLine);
                                 readLine = bufferedReader.readLine();
@@ -970,4 +988,69 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }
+
+    public void showManual() {
+
+        JPanel panel = new JPanel();
+        PagePanel panelpdf = new PagePanel();
+
+        JButton back = new JButton("Back");
+
+        JButton next = new JButton("Next");
+
+        panelpdf.setPreferredSize(new Dimension(500, 600));
+        panel.add(back);
+        panel.add(panelpdf);
+        panel.add(next);
+
+        PDFFile pdffile;
+
+        try {
+            //File file = new File ("\\src\\encrypkarch\\Documents\\manual.pdf");
+            File file = new File("C:\\Universidad\\Tesis\\Algoritmo\\Prototipos\\EncrypKarch\\src\\encrypkarch\\Documents\\manual.pdf");
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+            FileChannel channel = raf.getChannel();
+            ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
+            pdffile = new PDFFile(buf);
+            PDFPage page = pdffile.getPage(indice);
+            panelpdf.setToolTipText("Manual de usuario");
+            panelpdf.setBackground(Color.LIGHT_GRAY);
+            panelpdf.setSize(1, 1);
+            panelpdf.showPage(page);
+            
+            back.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    if (indice > 0) {
+                        indice--;
+                        PDFPage page = pdffile.getPage(indice);
+                        panelpdf.showPage(page);
+                    }
+
+                }
+            });
+
+            next.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (indice < pdffile.getNumPages()) {
+                        indice++;
+                        PDFPage page = pdffile.getPage(indice);
+                        panelpdf.showPage(page);
+                    }
+
+                }
+
+            });
+
+            JOptionPane.showMessageDialog(this, panel, "Manual de usuario", HEIGHT, new ImageIcon());
+
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "Error al abrir el archivo" + ioe);
+        }
+
+    }
+
 }
