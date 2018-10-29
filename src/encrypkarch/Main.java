@@ -50,6 +50,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         inputText.setLineWrap(true);
         outputText.setLineWrap(true);
+        cypher.setEnabled(false);
         InputMap paswd = password.getInputMap(password.WHEN_FOCUSED);
         paswd.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
@@ -503,9 +504,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_decipherActionPerformed
 
     private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
+        String cryptograma = "";
+
         if (!inputText.getText().isEmpty() && !(String.valueOf(password.getPassword())).isEmpty()) {
             int[][] arrayText = arrayText(inputText.getText());
-            String cryptograma = "";
             for (int[] fila : arrayText) {
                 int[] text = new int[16];
                 int i = 0;
@@ -514,7 +516,9 @@ public class Main extends javax.swing.JFrame {
                     i++;
                 }
                 try {
+
                     cryptograma += cifrar(text, arrayPassword(String.valueOf(password.getPassword())));
+
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -530,6 +534,7 @@ public class Main extends javax.swing.JFrame {
 
     private void keyGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyGenerateActionPerformed
         keyGenerate();
+        cypher.setEnabled(true);
     }//GEN-LAST:event_keyGenerateActionPerformed
 
     private void cleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanActionPerformed
@@ -544,9 +549,20 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_copyCryptogramActionPerformed
 
     private void passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyTyped
-        if ((String.valueOf(password.getPassword())).length() == 16) {
+
+        if (evt.getKeyChar() == 'Ñ' || evt.getKeyChar() == 'ñ') {
             evt.consume();
         }
+        if (password.getPassword().length >= 5) {
+            cypher.setEnabled(true);
+            if ((String.valueOf(password.getPassword())).length() == 16) {
+                evt.consume();
+            }
+        } else {
+            cypher.setEnabled(false);
+        }
+
+
     }//GEN-LAST:event_passwordKeyTyped
 
     private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
@@ -866,14 +882,16 @@ public class Main extends javax.swing.JFrame {
     //generador de contraseñas
     public void keyGenerate() {
         String pass = "";
-        for (int i = 0; i < 16;) {
 
-            int numero = (random.nextInt(126));
-            if (numero > 31) {
-                pass += (char) numero;
-                i++;
-            }
+        String NUMEROS = "0123456789";
+        String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
+        String ESPECIALES = ",.()/$#=+-*[]{}_:;?~\\^";
 
+        String key = NUMEROS + MAYUSCULAS + MINUSCULAS + ESPECIALES;
+
+        for (int i = 0; i < 16; i++) {
+            pass += (key.charAt((int) (Math.random() * key.length())));
         }
         this.password.setText(pass);
     }
@@ -975,6 +993,7 @@ public class Main extends javax.swing.JFrame {
                                 texto += descifrar(text, arrayPassword(pass));
                             }
                             password.setText(texto);
+                            cypher.setEnabled(true);
                             break;
                     }
                     open = true;
@@ -1019,33 +1038,22 @@ public class Main extends javax.swing.JFrame {
 
             panelpdf.showPage(page);
             panelpdf.repaint();
-            back.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                    if (indice > 0) {
-                        indice--;
-                        PDFPage page = pdffile.getPage(indice);
-                        panelpdf.showPage(page);
-                        panelpdf.repaint();
-                    }
-
+            back.addActionListener((ActionEvent e) -> {
+                if (indice > 0) {
+                    indice--;
+                    PDFPage page1 = pdffile.getPage(indice);
+                    panelpdf.showPage(page1);
+                    panelpdf.repaint();
                 }
             });
 
-            next.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (indice < pdffile.getNumPages()) {
-                        indice++;
-                        PDFPage page = pdffile.getPage(indice);
-                        panelpdf.showPage(page);
-                        panelpdf.repaint();
-                    }
-
+            next.addActionListener((ActionEvent e) -> {
+                if (indice < pdffile.getNumPages()) {
+                    indice++;
+                    PDFPage page1 = pdffile.getPage(indice);
+                    panelpdf.showPage(page1);
+                    panelpdf.repaint();
                 }
-
             });
 
             JOptionPane.showMessageDialog(this, panel, "Manual de usuario", HEIGHT, new ImageIcon());
