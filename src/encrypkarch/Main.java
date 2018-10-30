@@ -10,7 +10,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.BufferedReader;
@@ -810,9 +809,14 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        Operaciones aes = new Operaciones();
+        Operaciones karch = new Operaciones();
         byte[] tempRef_mClaveExp = mClaveExp;
-        aes.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
+        try {
+            karch.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
+        } catch (Exception e) {
+
+             ///corregir
+        }
         mClaveExp = tempRef_mClaveExp;
         byte[] tempRef_mClaveExp2 = mClaveExp;
         d.desencriptar(texto, mClaveExp);//ciframos el texto
@@ -855,11 +859,18 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        Operaciones aes = new Operaciones();
+        Operaciones karch = new Operaciones();
         byte[] tempRef_mClaveExp = mClaveExp;
-        aes.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
+        try {
+            karch.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
+        } catch (Exception e) {
+
+            ///corregir
+        }
+
         mClaveExp = tempRef_mClaveExp;
         byte[] tempRef_mClaveExp2 = mClaveExp;
+
         c.encriptar(texto, tempRef_mClaveExp2);
         mClaveExp = tempRef_mClaveExp2;
 
@@ -883,6 +894,17 @@ public class Main extends javax.swing.JFrame {
     public void keyGenerate() {
         String pass = "";
 
+//        for (int i = 0; i < 16;) {
+//
+//            int numero = (random.nextInt(256));
+//            if (numero > 31 && numero < 127) {
+//
+//                pass += (char) numero;
+//                i++;
+//            }
+//
+//        }
+//        this.password.setText(pass);
         String NUMEROS = "0123456789";
         String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
