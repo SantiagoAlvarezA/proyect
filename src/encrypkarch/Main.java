@@ -461,18 +461,21 @@ public class Main extends javax.swing.JFrame {
         if (!(String.valueOf(password.getPassword())).isEmpty()) {
             String passwT = "";
             String passwd = JOptionPane.showInputDialog("Digite una contraseña");
-
-            int[][] arrayText = arrayText(String.valueOf(password.getPassword()));
-            for (int[] fila : arrayText) {
-                int[] text = new int[16];
-                int i = 0;
-                for (int col : fila) {
-                    text[i] = col;
-                    i++;
+            
+            if (passwd != null) {
+                int[][] arrayText = arrayText(String.valueOf(password.getPassword()));
+                for (int[] fila : arrayText) {
+                    int[] text = new int[16];
+                    int i = 0;
+                    for (int col : fila) {
+                        text[i] = col;
+                        i++;
+                    }
+                    passwT += cifrar(text, arrayPassword(passwd));
                 }
-                passwT += cifrar(text, arrayPassword(passwd));
+                createFileTxt(passwT, ".password");
             }
-            createFileTxt(passwT, ".password");
+            
         } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio \npor favor genere una contraseña");
         }
@@ -815,7 +818,7 @@ public class Main extends javax.swing.JFrame {
             karch.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
         } catch (Exception e) {
 
-             ///corregir
+            ///corregir
         }
         mClaveExp = tempRef_mClaveExp;
         byte[] tempRef_mClaveExp2 = mClaveExp;
