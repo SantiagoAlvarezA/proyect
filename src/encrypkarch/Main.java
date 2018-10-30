@@ -522,7 +522,7 @@ public class Main extends javax.swing.JFrame {
                     cryptograma += cifrar(text, arrayPassword(String.valueOf(password.getPassword())));
 
                 } catch (Exception e) {
-                    System.out.println(e);
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error mientras se cifraba el mensaje");
                 }
 
             }
