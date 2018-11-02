@@ -658,7 +658,7 @@ public class Main extends javax.swing.JFrame {
     private void manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualActionPerformed
         // TODO add your handling code here:
 
-        showManual("C:\\Universidad\\Tesis\\Algoritmo\\Prototipos\\EncrypKarch\\src\\encrypkarch\\Documents\\manual.pdf", "Manual de usuario");
+        showManual("C:\\Universidad\\Tesis\\Algoritmo\\Prototipos\\EncrypSarch\\src\\encrypkarch\\Documents\\manual.pdf", "Manual de usuario");
 
 
     }//GEN-LAST:event_manualActionPerformed

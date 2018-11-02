@@ -7,9 +7,9 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="EncrypKarch" default="default" basedir=".">
+<project name="EncrypSarch" default="default" basedir=".">
     <target name="-post-jar">
-        <property name="store.jar.name" value="EncrypKarch"/>
+        <property name="store.jar.name" value="EncrypSarch"/>
         <property name="store.dir" value="dist"/>
         <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/> 
         <echo message="Packaging ${application.title} into a single JAR at ${store.jar}"/> 
@@ -32,7 +32,7 @@
         <delete file="${store.dir}/README.TXT"/>
     </target>
 
-    <description>Builds, tests, and runs the project EncrypKarch.</description>
+    <description>Builds, tests, and runs the project EncrypSarch.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
