@@ -9,7 +9,6 @@ package encrypkarch;
  *
  * @author CHRISTIAN
  */
-import java.io.*;
 
 public class Operaciones {
 
