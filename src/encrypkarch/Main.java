@@ -39,7 +39,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Main extends javax.swing.JFrame {
 
-    int indice = 1;
+    int index = 1;
     Random random = new Random();
 
     /**
@@ -464,14 +464,14 @@ public class Main extends javax.swing.JFrame {
             
             if (passwd != null) {
                 int[][] arrayText = arrayText(String.valueOf(password.getPassword()));
-                for (int[] fila : arrayText) {
+                for (int[] row : arrayText) {
                     int[] text = new int[16];
                     int i = 0;
-                    for (int col : fila) {
+                    for (int col : row) {
                         text[i] = col;
                         i++;
                     }
-                    passwT += cifrar(text, arrayPassword(passwd));
+                    passwT += cipher(text, arrayPassword(passwd));
                 }
                 createFileTxt(passwT, ".password");
             }
@@ -493,7 +493,7 @@ public class Main extends javax.swing.JFrame {
                         text[i] = col;
                         i++;
                     }
-                    texto += descifrar(text, arrayPassword(String.valueOf(password.getPassword())));
+                    texto += decipher(text, arrayPassword(String.valueOf(password.getPassword())));
 
                 }
                 outputText.setText(texto);
@@ -506,7 +506,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_decipherActionPerformed
 
     private void cypherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cypherActionPerformed
-        String cryptograma = "";
+        String cryptogram = "";
 
         if (!inputText.getText().isEmpty() && !(String.valueOf(password.getPassword())).isEmpty()) {
             int[][] arrayText = arrayText(inputText.getText());
@@ -519,7 +519,7 @@ public class Main extends javax.swing.JFrame {
                 }
                 try {
 
-                    cryptograma += cifrar(text, arrayPassword(String.valueOf(password.getPassword())));
+                    cryptogram += cipher(text, arrayPassword(String.valueOf(password.getPassword())));//cipher
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Ha ocurrido un error mientras se cifraba el mensaje");
@@ -527,7 +527,7 @@ public class Main extends javax.swing.JFrame {
 
             }
 
-            outputText.setText(cryptograma);
+            outputText.setText(cryptogram);
 
         } else {
             JOptionPane.showMessageDialog(null, "El campo de contraseña o entrada de texto estan vacios");
@@ -738,21 +738,21 @@ public class Main extends javax.swing.JFrame {
     }
 
     public int[][] arrayCryptogram(String text) {
-        String[] texto = new String[text.length() / 2];
+        String[] textLocal = new String[text.length() / 2];
         int t = 0;
         for (int i = 0; i < text.length();) {
-            texto[t] = text.substring(i, i + 2);
+            textLocal[t] = text.substring(i, i + 2);
 
             i = i + 2;
             t++;
         }
-        int[][] arrayBlok = new int[(int) ceil(texto.length / 16.0)][16];
+        int[][] arrayBlok = new int[(int) ceil(textLocal.length / 16.0)][16];
         int iArrayBytes = 0, jArrayBytes = 0;
 
-        for (int i = 0; i < texto.length; i++) {
+        for (int i = 0; i < textLocal.length; i++) {
             if (jArrayBytes < 16) {
 
-                arrayBlok[iArrayBytes][jArrayBytes] = Integer.parseInt(texto[i], 16);
+                arrayBlok[iArrayBytes][jArrayBytes] = Integer.parseInt(textLocal[i], 16);
                 jArrayBytes++;
 
             } else {
@@ -766,124 +766,123 @@ public class Main extends javax.swing.JFrame {
     }
 
     public int[] arrayPassword(String text) {
-        CifradoClave cifradoClave = new CifradoClave();
-        char[] clave = new char[16];
+        CifradoClave cipherKey = new CifradoClave(); //
+        char[] key = new char[16];
         for (int i = 0; i < text.length(); i++) {
-            clave[i] = text.charAt(i);
+            key[i] = text.charAt(i);
         }
 
-        byte[][] arrTexto = new byte[4][4];
+        byte[][] arrayText = new byte[4][4];
         for (int i = 0; i < 4; i++) {
 
             for (int j = 0; j < 4; j++) {
-                arrTexto[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
+                arrayText[j][i] = (byte) key[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
 
             }
         }
 
-        cifradoClave.encriptar_cave(arrTexto);
+        cipherKey.encriptar_cave(arrayText);
 
-        int[] array = cifradoClave.getClave();
+        int[] array = cipherKey.getClave();
 
         return array;
     }
 
     @SuppressWarnings("UnusedAssignment")
-    public String descifrar(int[] crypt, int[] passwd) {
-        String text = "";
-        Descifrado d = new Descifrado();
+    public String decipher(int[] crypt, int[] passwd) {
+        String textFinal = "";
+        Descifrado decript = new Descifrado();
 
-        byte[] mClaveExp = new byte[256];
+        byte[] mKeyExp = new byte[256];
 
-        int[] clave = passwd;
-        int[] arrTexto = crypt;
-        byte[][] texto = new byte[4][4];
-        byte[][] mClave = new byte[4][4];
+        int[] key = passwd;
+        int[] arrayText = crypt;
+        byte[][] text = new byte[4][4];
+        byte[][] mKey = new byte[4][4];
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
+                mKey[j][i] = (byte) key[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
             }
         }
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                texto[j][i] = (byte) arrTexto[i * 4 + j]; // texto a cifrar en una matriz 4X4
+                text[j][i] = (byte) arrayText[i * 4 + j]; // texto a cifrar en una matriz 4X4
             }
         }
 
-        Operaciones karch = new Operaciones();
-        byte[] tempRef_mClaveExp = mClaveExp;
+        Operaciones sarchOperations = new Operaciones();
+        byte[] tempRef_mKeyExp = mKeyExp;
         try {
-            karch.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
-        } catch (Exception e) {
-
-            ///corregir
+            sarchOperations.expandirClave(mKey, tempRef_mKeyExp); //expandir la clave y guardarla en un array
+        } catch (Exception e) {///corregir
         }
-        mClaveExp = tempRef_mClaveExp;
-        byte[] tempRef_mClaveExp2 = mClaveExp;
-        d.desencriptar(texto, mClaveExp);//ciframos el texto
-        mClaveExp = tempRef_mClaveExp2;
+        mKeyExp = tempRef_mKeyExp;
+        byte[] tempRef_mKeyExp2 = mKeyExp;
+        decript.desencriptar(text, mKeyExp);//ciframos el texto
+        mKeyExp = tempRef_mKeyExp2;
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (0 != texto[j][i]) {
-                    String hex = String.format("%02x", texto[j][i]);
-                    int dec = Integer.parseInt(hex, 16);
-                    text += (char) dec;
+                if (0 != text[j][i]) {
+                    String hexadecimal = String.format("%02x", text[j][i]);
+                    int decimal = Integer.parseInt(hexadecimal, 16);
+                    textFinal += (char) decimal;
                 }
             }
         }
 
-        return text;
+        return textFinal;
     }
 
     @SuppressWarnings("UnusedAssignment")
-    public String cifrar(int[] tex, int[] passwd) {
-        String cryptograma = "";
-        Cifrado c = new Cifrado();
-        byte[] mClaveExp = new byte[256];
+    public String cipher(int[] tex, int[] passwd) {
+        String cryptogram = "";
+        
+        Cifrado cipher = new Cifrado();
+        byte[] mKeyExp = new byte[256];
 
-        int[] clave = passwd;
-        int[] arrTexto = tex;
+        int[] key = passwd;
+        int[] arrayText = tex;
 
-        byte[][] texto = new byte[4][4];
-        byte[][] mClave = new byte[4][4];
+        byte[][] text = new byte[4][4];
+        byte[][] mKey = new byte[4][4];
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                mClave[j][i] = (byte) clave[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
+                mKey[j][i] = (byte) key[i * 4 + j]; // convierte clave a cifrar en una matriz 4X4
             }
         }
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                texto[j][i] = (byte) arrTexto[i * 4 + j]; // texto a cifrar en una matriz 4X4
+                text[j][i] = (byte) arrayText[i * 4 + j]; // texto a cifrar en una matriz 4X4
             }
         }
 
-        Operaciones karch = new Operaciones();
-        byte[] tempRef_mClaveExp = mClaveExp;
+        Operaciones sarchOperations = new Operaciones();
+        byte[] tempRef_mKeyExp = mKeyExp;
         try {
-            karch.expandirClave(mClave, tempRef_mClaveExp); //expandir la clave y guardarla en un array
+            sarchOperations.expandirClave(mKey, tempRef_mKeyExp); //expandir la clave y guardarla en un array
         } catch (Exception e) {
 
             ///corregir
         }
 
-        mClaveExp = tempRef_mClaveExp;
-        byte[] tempRef_mClaveExp2 = mClaveExp;
+        mKeyExp = tempRef_mKeyExp;
+        byte[] tempRef_mKeyExp2 = mKeyExp;
 
-        c.encriptar(texto, tempRef_mClaveExp2);
-        mClaveExp = tempRef_mClaveExp2;
+        cipher.encriptar(text, tempRef_mKeyExp2);
+        mKeyExp = tempRef_mKeyExp2;
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                String hex = String.format("%02x", texto[j][i]);
-                cryptograma += hex;
+                String hexadecimal = String.format("%02x", text[j][i]);
+                cryptogram += hexadecimal;
             }
         }
-        return cryptograma;
+        return cryptogram;
     }
 
     //metodo para copiar el resultado al clipboard
@@ -895,30 +894,18 @@ public class Main extends javax.swing.JFrame {
 
     //generador de contraseñas
     public void keyGenerate() {
-        String pass = "";
-
-//        for (int i = 0; i < 16;) {
-//
-//            int numero = (random.nextInt(256));
-//            if (numero > 31 && numero < 127) {
-//
-//                pass += (char) numero;
-//                i++;
-//            }
-//
-//        }
-//        this.password.setText(pass);
-        String NUMEROS = "0123456789";
-        String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String passwd = "";
+        String NUMBERS = "0123456789";
+        String CAPS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
-        String ESPECIALES = ",.()/$#=+-*[]{}_:;?~\\^";
+        String SPECIALS = ",.()/$#=+-*[]{}_:;?~\\^";
 
-        String key = NUMEROS + MAYUSCULAS + MINUSCULAS + ESPECIALES;
+        String key = NUMBERS + CAPS + MINUSCULAS + SPECIALS;
 
         for (int i = 0; i < 16; i++) {
-            pass += (key.charAt((int) (Math.random() * key.length())));
+            passwd += (key.charAt((int) (Math.random() * key.length())));
         }
-        this.password.setText(pass);
+        this.password.setText(passwd);
     }
 
     public void createFileTxt(String data, String nameFile) {
@@ -975,7 +962,7 @@ public class Main extends javax.swing.JFrame {
         boolean open = false;
         while (!open) {
             JFileChooser jFileChooser = new JFileChooser();
-            FileNameExtensionFilter fileNameExtensionFilter = null;
+            FileNameExtensionFilter fileNameExtensionFilter;
             //filtrar el tipo de archivos que se pueden abrir
             if (type.equals("password")) {
                 fileNameExtensionFilter = new FileNameExtensionFilter("password", "password");
@@ -1007,17 +994,17 @@ public class Main extends javax.swing.JFrame {
                             }
                             int[][] arrayText = arrayCryptogram(hex);
                             String pass = JOptionPane.showInputDialog("Ingrese su contraseña");
-                            String texto = "";
-                            for (int[] fila : arrayText) {
+                            String textString = "";
+                            for (int[] row : arrayText) {
                                 int[] text = new int[16];
                                 int i = 0;
-                                for (int col : fila) {
+                                for (int col : row) {
                                     text[i] = col;
                                     i++;
                                 }
-                                texto += descifrar(text, arrayPassword(pass));
+                                textString += decipher(text, arrayPassword(pass));
                             }
-                            password.setText(texto);
+                            password.setText(textString);
                             cypher.setEnabled(true);
                             break;
                     }
@@ -1038,9 +1025,9 @@ public class Main extends javax.swing.JFrame {
         JPanel panel = new JPanel();
         PagePanel panelpdf = new PagePanel();
 
-        JButton back = new JButton("Back");
+        JButton back = new JButton("Anterior");
 
-        JButton next = new JButton("Next");
+        JButton next = new JButton("Siguiente");
 
         panelpdf.setPreferredSize(new Dimension(500, 600));
         panel.add(back);
@@ -1056,7 +1043,7 @@ public class Main extends javax.swing.JFrame {
             FileChannel channel = raf.getChannel();
             ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
             pdffile = new PDFFile(buf);
-            PDFPage page = pdffile.getPage(indice);
+            PDFPage page = pdffile.getPage(index);
             panelpdf.setToolTipText(title);
             panelpdf.setBackground(Color.LIGHT_GRAY);
             panelpdf.setSize(1, 1);
@@ -1064,18 +1051,18 @@ public class Main extends javax.swing.JFrame {
             panelpdf.showPage(page);
             panelpdf.repaint();
             back.addActionListener((ActionEvent e) -> {
-                if (indice > 0) {
-                    indice--;
-                    PDFPage page1 = pdffile.getPage(indice);
+                if (index > 0) {
+                    index--;
+                    PDFPage page1 = pdffile.getPage(index);
                     panelpdf.showPage(page1);
                     panelpdf.repaint();
                 }
             });
 
             next.addActionListener((ActionEvent e) -> {
-                if (indice < pdffile.getNumPages()) {
-                    indice++;
-                    PDFPage page1 = pdffile.getPage(indice);
+                if (index < pdffile.getNumPages()) {
+                    index++;
+                    PDFPage page1 = pdffile.getPage(index);
                     panelpdf.showPage(page1);
                     panelpdf.repaint();
                 }
