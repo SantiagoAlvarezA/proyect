@@ -449,7 +449,7 @@ public class Main extends javax.swing.JFrame {
     private void saveResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveResultActionPerformed
         // TODO add your handling code here:
         if (!outputText.getText().isEmpty()) {
-            createFileTxt(outputText.getText(), "Result.txt");
+            createFileTxt(outputText.getText(), ".res");
 
         } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio");
@@ -481,7 +481,7 @@ public class Main extends javax.swing.JFrame {
                     }
                     passwT += cipher(text, arrayPassword(passwd));
                 }
-                createFileTxt(passwT, ".password");
+                createFileTxt(passwT, ".pas");
             }
 
         } else {
@@ -616,7 +616,7 @@ public class Main extends javax.swing.JFrame {
 
     private void openPasswordMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openPasswordMouseMoved
         // TODO add your handling code here:
-        openPassword.setToolTipText("Abrir un archivo .password para cargar la contraseña de cifrado");
+        openPassword.setToolTipText("Abrir un archivo .pas para cargar la contraseña de cifrado");
 
     }//GEN-LAST:event_openPasswordMouseMoved
 
@@ -939,9 +939,9 @@ public class Main extends javax.swing.JFrame {
                         bfwriter.close();
                         exist = true;
                         JOptionPane.showMessageDialog(null, "El archivo se guardo con exito.");
-                        if (nameFile.equals("Result")) {
+                        if (nameFile.equals(".res")) {
                             outputText.setText("");
-                        } else if (nameFile.equals("Password")) {
+                        } else if (nameFile.equals(".pas")) {
                             password.setText("");
                         }
                     } else {
@@ -977,9 +977,9 @@ public class Main extends javax.swing.JFrame {
             FileNameExtensionFilter fileNameExtensionFilter;
             //filtrar el tipo de archivos que se pueden abrir
             if (type.equals("password")) {
-                fileNameExtensionFilter = new FileNameExtensionFilter("password", "password");
+                fileNameExtensionFilter = new FileNameExtensionFilter("password", "pas");
             } else {
-                fileNameExtensionFilter = new FileNameExtensionFilter("txt, password", "password", "txt");
+                fileNameExtensionFilter = new FileNameExtensionFilter("txt, password, result", "pas", "txt", "res");
             }
             jFileChooser.setFileFilter(fileNameExtensionFilter);
 
