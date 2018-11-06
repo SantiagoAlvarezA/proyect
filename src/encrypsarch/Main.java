@@ -1029,7 +1029,7 @@ public class Main extends javax.swing.JFrame {
         PagePanel panelpdf = new PagePanel();
 
         JButton back = new JButton("Anterior");
-
+        back.setEnabled(false);
         JButton next = new JButton("Siguiente");
 
         panelpdf.setPreferredSize(new Dimension(500, 600));
@@ -1056,18 +1056,32 @@ public class Main extends javax.swing.JFrame {
             back.addActionListener((ActionEvent e) -> {
                 if (index > 0) {
                     index--;
+                    next.setEnabled(true);
                     PDFPage page1 = pdffile.getPage(index);
                     panelpdf.showPage(page1);
                     panelpdf.repaint();
                 }
+                if(index == 1){
+                    back.setEnabled(false);                    
+                }else{
+                    back.setEnabled(true);
+                }
+                
             });
 
             next.addActionListener((ActionEvent e) -> {
                 if (index < pdffile.getNumPages()) {
                     index++;
+                    back.setEnabled(true);
                     PDFPage page1 = pdffile.getPage(index);
                     panelpdf.showPage(page1);
                     panelpdf.repaint();
+                }
+                if(index == pdffile.getNumPages()){
+                    next.setEnabled(false);
+                    back.setEnabled(true);
+                }else{
+                    next.setEnabled(true);
                 }
             });
 
