@@ -9,26 +9,26 @@ package encrypsarch;
  *
  * @author Alvar
  */
-public class CifradoClave {
+public class CipherKey {
 
     int[] clave = new int[16];
 
-    public int[] getClave() {
+    public int[] getKey() {
         return clave;
     }
 
-    OperacionesClave a = new OperacionesClave();
+    OperationsKey a = new OperationsKey();
 
-    public final void encriptar_cave(byte[][] texto) {
+    public final void cipherKey(byte[][] text) {
 
         for (int i = 1; i < 8; i++) {
-            a.subBytes(texto);
-            a.shiftRows(texto);
-            a.mixColumns(texto);
+            a.subBytes(text);
+            a.shiftRows(text);
+            a.mixColumns(text);
 
         }
-        a.subBytes(texto);
-        a.shiftRows(texto);
+        a.subBytes(text);
+        a.shiftRows(text);
         clave = a.getDec();
 
     }

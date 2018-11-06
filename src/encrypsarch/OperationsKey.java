@@ -5,14 +5,14 @@
  */
 package encrypsarch;
 
-import static encrypsarch.Operaciones.gmul;
-import static encrypsarch.Operaciones.valorCajaS;
+import static encrypsarch.Operations.gmul;
+import static encrypsarch.Operations.valueBoxS;
 
 /**
  *
  * @author Alvar
  */
-public class OperacionesClave {
+public class OperationsKey {
 
     int[] dec = new int[16];
 
@@ -28,7 +28,7 @@ public class OperacionesClave {
 
                 byte hex = texto[j][i];
 
-                hex = (byte) valorCajaS(i);
+                hex = (byte) valueBoxS(i);
 
             }
 

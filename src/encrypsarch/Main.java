@@ -469,7 +469,7 @@ public class Main extends javax.swing.JFrame {
         if (!(String.valueOf(password.getPassword())).isEmpty()) {
             String passwT = "";
             String passwd = JOptionPane.showInputDialog("Digite una contraseña");
-            
+
             if (passwd != null) {
                 int[][] arrayText = arrayText(String.valueOf(password.getPassword()));
                 for (int[] row : arrayText) {
@@ -483,7 +483,7 @@ public class Main extends javax.swing.JFrame {
                 }
                 createFileTxt(passwT, ".password");
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "No se puede guardar un archivo vacio \npor favor genere una contraseña");
         }
@@ -669,8 +669,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_manualActionPerformed
 
     private void informationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informationActionPerformed
-         // TODO add your handling code here:
-         showManual("Documents\\information.pdf", "Manual de usuario");
+        // TODO add your handling code here:
+        showManual("Documents\\information.pdf", "Manual de usuario");
     }//GEN-LAST:event_informationActionPerformed
 
     /**
@@ -747,6 +747,8 @@ public class Main extends javax.swing.JFrame {
         return arrayBlok;
     }
 
+ 
+    
     public int[][] arrayCryptogram(String text) {
         String[] textLocal = new String[text.length() / 2];
         int t = 0;
@@ -776,7 +778,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     public int[] arrayPassword(String text) {
-        CifradoClave cipherKey = new CifradoClave(); //
+        CipherKey cipherKey = new CipherKey(); //
         char[] key = new char[16];
         for (int i = 0; i < text.length(); i++) {
             key[i] = text.charAt(i);
@@ -791,9 +793,9 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        cipherKey.encriptar_cave(arrayText);
+        cipherKey.cipherKey(arrayText);
 
-        int[] array = cipherKey.getClave();
+        int[] array = cipherKey.getKey();
 
         return array;
     }
@@ -801,7 +803,7 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("UnusedAssignment")
     public String decipher(int[] crypt, int[] passwd) {
         String textFinal = "";
-        Descifrado decript = new Descifrado();
+        Decipher decript = new Decipher();
 
         byte[] mKeyExp = new byte[256];
 
@@ -822,15 +824,15 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        Operaciones sarchOperations = new Operaciones();
+        Operations sarchOperations = new Operations();
         byte[] tempRef_mKeyExp = mKeyExp;
         try {
-            sarchOperations.expandirClave(mKey, tempRef_mKeyExp); //expandir la clave y guardarla en un array
+            sarchOperations.expandKey(mKey, tempRef_mKeyExp); //expandir la clave y guardarla en un array
         } catch (Exception e) {///corregir
         }
         mKeyExp = tempRef_mKeyExp;
         byte[] tempRef_mKeyExp2 = mKeyExp;
-        decript.desencriptar(text, mKeyExp);//ciframos el texto
+        decript.decipher(text, mKeyExp);//ciframos el texto
         mKeyExp = tempRef_mKeyExp2;
 
         for (int i = 0; i < 4; i++) {
@@ -849,8 +851,8 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("UnusedAssignment")
     public String cipher(int[] tex, int[] passwd) {
         String cryptogram = "";
-        
-        Cifrado cipher = new Cifrado();
+
+        Cipher cipher = new Cipher();
         byte[] mKeyExp = new byte[256];
 
         int[] key = passwd;
@@ -871,10 +873,10 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        Operaciones sarchOperations = new Operaciones();
+        Operations sarchOperations = new Operations();
         byte[] tempRef_mKeyExp = mKeyExp;
         try {
-            sarchOperations.expandirClave(mKey, tempRef_mKeyExp); //expandir la clave y guardarla en un array
+            sarchOperations.expandKey(mKey, tempRef_mKeyExp); //expandir la clave y guardarla en un array
         } catch (Exception e) {
 
             ///corregir
@@ -883,7 +885,7 @@ public class Main extends javax.swing.JFrame {
         mKeyExp = tempRef_mKeyExp;
         byte[] tempRef_mKeyExp2 = mKeyExp;
 
-        cipher.encriptar(text, tempRef_mKeyExp2);
+        cipher.cipher(text, tempRef_mKeyExp2);
         mKeyExp = tempRef_mKeyExp2;
 
         for (int i = 0; i < 4; i++) {
@@ -1069,12 +1071,12 @@ public class Main extends javax.swing.JFrame {
                     panelpdf.showPage(page1);
                     panelpdf.repaint();
                 }
-                if(index == 1){
-                    back.setEnabled(false);                    
-                }else{
+                if (index == 1) {
+                    back.setEnabled(false);
+                } else {
                     back.setEnabled(true);
                 }
-                
+
             });
 
             next.addActionListener((ActionEvent e) -> {
@@ -1085,10 +1087,10 @@ public class Main extends javax.swing.JFrame {
                     panelpdf.showPage(page1);
                     panelpdf.repaint();
                 }
-                if(index == pdffile.getNumPages()){
+                if (index == pdffile.getNumPages()) {
                     next.setEnabled(false);
                     back.setEnabled(true);
-                }else{
+                } else {
                     next.setEnabled(true);
                 }
             });
