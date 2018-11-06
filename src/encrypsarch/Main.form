@@ -472,6 +472,9 @@
               <Dimension value="[32, 32]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="informationActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="manual">
           <Properties>

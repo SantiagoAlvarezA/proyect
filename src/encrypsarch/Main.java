@@ -381,6 +381,11 @@ public class Main extends javax.swing.JFrame {
         information.setMaximumSize(new java.awt.Dimension(32, 32));
         information.setMinimumSize(new java.awt.Dimension(32, 32));
         information.setPreferredSize(new java.awt.Dimension(32, 32));
+        information.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informationActionPerformed(evt);
+            }
+        });
 
         manual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/encrypsarch/Icons/manual.png"))); // NOI18N
         manual.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -660,11 +665,13 @@ public class Main extends javax.swing.JFrame {
 
     private void manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualActionPerformed
         // TODO add your handling code here:
-
         showManual("Documents\\manual.pdf", "Manual de usuario");
-
-
     }//GEN-LAST:event_manualActionPerformed
+
+    private void informationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informationActionPerformed
+         // TODO add your handling code here:
+         showManual("Documents\\information.pdf", "Manual de usuario");
+    }//GEN-LAST:event_informationActionPerformed
 
     /**
      * @param args the command line arguments
