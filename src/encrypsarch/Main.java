@@ -39,7 +39,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Main extends javax.swing.JFrame {
 
-    int index = 1;
+    int index;
     Random random = new Random();
 
     /**
@@ -1047,6 +1047,7 @@ public class Main extends javax.swing.JFrame {
         PDFFile pdffile;
 
         try {
+            index = 1;
             //File file = new File ("\\src\\encrypkarch\\Documents\\manual.pdf");
             File file = new File(route);
             RandomAccessFile raf = new RandomAccessFile(file, "r");
