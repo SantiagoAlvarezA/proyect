@@ -53,6 +53,8 @@ public class Main extends javax.swing.JFrame {
         InputMap paswd = password.getInputMap(password.WHEN_FOCUSED);
         paswd.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null");
 
+        setIconImage(new ImageIcon(getClass().getResource("Icons/sarch.png")).getImage());
+
     }
 
     /**
@@ -747,8 +749,6 @@ public class Main extends javax.swing.JFrame {
         return arrayBlok;
     }
 
- 
-    
     public int[][] arrayCryptogram(String text) {
         String[] textLocal = new String[text.length() / 2];
         int t = 0;
